@@ -1,0 +1,56 @@
+<!--其他培训-->
+<div class="otherTraining">
+  <div class="main_header_4">
+    <span>其他培训</span>
+    <i><a href="#/courseCenter/17">更多>></a></i>
+  </div>
+  <div class="otherTrainingList clearfix">
+    <ul class="mar_top_15">
+      <li ng-repeat="oCourseData in otherCourseData.ListData">
+        <img ng-src="{{otherCourseData.ImageCourse+'/'+oCourseData.Img}}" err-src="images/notFound.jpeg">
+        <span title="{{oCourseData.Name}}">{{oCourseData.Name}}</span>
+        <a href="#/courseCenter/courseDetails/{{oCourseData.Id}}"><img src="images/song_logo.png" alt=""></a>
+        <a href="#/courseCenter/courseDetails/{{oCourseData.Id}}">试看</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<style>
+  .otherTraining{
+    height:194px;
+  }
+  .otherTraining .otherTrainingList{
+    height:158px;
+    border: 1px solid #e5e5e5;
+    border-top: none;
+    overflow: hidden;
+  }
+  .otherTraining ul{
+    padding-left: 8px;
+    height: 136px;
+    overflow: hidden;
+  }
+  .otherTraining ul > li{
+    width: 170px;
+    height: 136px;
+    margin-right: 5px;
+    line-height: 32px;
+    float: left;
+  }
+  .otherTraining ul > li > img{
+    display: block;
+    width: 170px;
+    height: 106px;
+
+  }
+  .otherTraining ul > li > span {
+    display: inline-block;
+    width: 110px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .otherTraining ul > li > span, .otherTraining ul > li > a{
+    vertical-align: middle;
+  }
+</style>

@@ -1,0 +1,55 @@
+<!--技能培训-->
+<div class="skillTraining">
+  <div class="main_header_4">
+    <span>技能培训</span>
+    <i><a href="#/courseCenter/16">更多>></a></i>
+  </div>
+  <div class="skillTrainingList clearfix">
+    <ul class="mar_top_15">
+      <li ng-repeat="sCourseData in skillCourseData.ListData">
+        <img ng-src="{{skillCourseData.ImageCourse+'/'+sCourseData.Img}}" err-src="images/notFound.jpeg">
+        <span title="{{sCourseData.Name}}">{{sCourseData.Name}}</span>
+        <a href="#/courseCenter/courseDetails/{{sCourseData.Id}}"><img src="images/song_logo.png" alt=""></a>
+        <a href="#/courseCenter/courseDetails/{{sCourseData.Id}}">试看</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<style>
+  .skillTraining{
+    height:194px;
+  }
+  .skillTraining .skillTrainingList{
+    height:158px;
+    border: 1px solid #e5e5e5;
+    border-top: none;
+    overflow: hidden;
+  }
+  .skillTraining ul{
+    padding-left: 8px;
+    height: 136px;
+    overflow: hidden;
+  }
+  .skillTraining ul > li{
+    width: 170px;
+    height: 136px;
+    margin-right: 5px;
+    line-height: 32px;
+    float: left;
+  }
+  .skillTraining ul > li > img{
+    display: block;
+    width: 170px;
+    height: 106px;
+  }
+  .skillTraining ul > li > span {
+    display: inline-block;
+    width: 110px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .skillTraining ul > li > span, .skillTraining ul > li > a{
+    vertical-align: middle;
+  }
+</style>

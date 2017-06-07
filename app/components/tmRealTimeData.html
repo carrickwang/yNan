@@ -1,0 +1,98 @@
+<!--实时数据-->
+<div class="realTimeData border_1">
+  <div class="main_header_1">
+    <img src="images/header.png" alt=""><span><!--{{realTimeData.TitleNav}}-->实时数据</span>
+  </div>
+  <div class="realTimeList" dw-loading="realTimeList">
+    <ul>
+      <li>
+        <span class="dot"></span><span>用户终端网速：<span id="spanspeed"></span></span>
+      </li>
+      <li>
+        <span class="dot"></span><span>学员注册人数：<span>{{realTimeData.Model.UsersCount}}</span></span>
+      </li>
+      <li>
+        <span class="dot"></span><span>标准课件数量：<span>{{realTimeData.Model.CourseCount}}</span></span>
+      </li>
+      <li>
+        <span class="dot"></span><span>参考课件数量：<span>{{realTimeData.Model.CourseCount}}</span></span>
+      </li>
+      <li>
+        <span class="dot"></span><span>在线学员人数：<span>{{realTimeData.Model.OnlineUsersCount}}</span></span>
+      </li>
+      <li>
+        <span class="dot"></span><span>完成学习人数：<span>{{realTimeData.Model.UserFinishCount}}</span></span>
+      </li>
+      <li>
+        <span class="dot"></span><span>访问学习次数：<span>{{realTimeData.Model.UserVisitCount}}</span></span>
+      </li>
+    </ul>
+  </div>
+</div>
+<style>
+  .realTimeData {
+    height: 200px;
+    background-color: #fff;
+  }
+  .realTimeData li span{
+    line-height: 20px;
+  }
+  .realTimeData .realTimeList{
+    margin-top:12px;
+  }
+</style>
+<script>
+  var starttime = new Date()
+</script>
+<img id="spimg" onload="getbandwidth();" width=0 height=0>
+
+<script>
+
+  function getbandwidth()
+  {
+    var filesize = 106;//measured in KB
+    var endtime = new Date();
+    var speed = Math.round(filesize*1000)/(endtime - starttime);
+    var level;
+    if(speed>=500)
+    {
+      level="优";
+    }
+    if(speed>=200&&speed<500)
+    {
+      level="良";
+    }
+    if(speed>=100&&speed<200)
+    {
+      level="中";
+    }
+    if(speed<100)
+    {
+      level="差";
+    }
+    var isie=document.all?true:false;
+    if(isie)
+    {
+      document.getElementById('spanspeed').innerText=level+"("+Math.round(speed)+"k/s)";
+    }
+    else
+    {
+      document.getElementById('spanspeed').textContent=level+"("+Math.round(speed)+"k/s)";
+    }
+  }
+  function rand(number) {
+    return Math.ceil(rnd() * number);
+
+  }
+
+  rnd.today = new Date();
+
+  rnd.seed = rnd.today.getTime();
+
+  function rnd() {
+    rnd.seed = (rnd.seed * 9301 + 49297) % 233280;
+    return rnd.seed / (233280.0);
+
+  };
+  document.getElementById('spimg').src="/images/pxb_01.jpg?"+rand(1000);
+</script>

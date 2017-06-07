@@ -1,0 +1,37 @@
+<div class="news grid_24 mar_top_15">
+    <div ng-class="{'新闻资讯':'com-header com-header-blue','图片新闻':'com-header com-header-blue',
+    '政策法规':'com-header com-header-green','公告通知':'com-header com-header-cyan',
+    '公务员培训':'com-header com-header-blue','专业技术人员培训':'com-header com-header-green'}[myNewsData.CategoryName]" style="margin-left: 0px">
+        <h4 class="pull-left">{{myNewsData.CategoryName}}</h4>
+    </div>
+    <div class="news-body" dw-loading="tmnewswithoutphoto">
+        <p ng-show="!myNewsData.ListData.length" class="result">暂无数据</p>
+        <ul>
+            <li ng-repeat="Data in myNewsData.ListData">
+                <a href="#/articleDetail/{{Data.Id}}" class="clearfix" target="_blank">
+                    <h5 class="pull-left"><span class="dian"></span>{{Data.Name}}</h5>
+                    <p class="newsTime pull-right">{{Data.CreateDate | dateFilter | date:'yyyy-MM-dd'}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<style>
+    .result{
+        color: #1e5e8a;
+        font-weight: bold;
+        font-size: 40px;
+        font-family: 黑体;
+        text-align: center;
+        line-height: 250px;
+        margin-left: -250px;
+        
+    }
+    .news .news-body h5,p{
+        font-size: 15px;
+    }
+    .news-body li{
+        margin: 5px 10px;
+    }
+</style>

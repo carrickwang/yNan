@@ -1,0 +1,115 @@
+<!--新闻资讯-->
+<div class="tmNewsInformation clearfix">
+  <div class="main_header_3">
+    <span ng-click="study_work({CategoryId: 781336})" class="news_1 activeTab">学习动态</span>
+    <span ng-click="study_work({CategoryId: 781337})" class="news_2 ">工作动态</span>
+    <i><a href="#/articleList/{{studyData.CategoryId}}">更多>></a></i>
+  </div>
+  <div class="newsBoxTab">
+    <div dw-loading="tmNewsInformation" class="newsBox border_1 mar_top_9">
+      <ul class="newsPic pull-left">
+        <li ng-repeat="stuData in studyData.ListData" repeat-finish="picSlide()">
+          <a href="#/articleDetail/{{stuData.Id}}" target="_blank"><img ng-src={{studyData.Path}}/{{stuData.Img}} width="232" height="157" err-Src="images/notFound.jpeg"></a>
+
+          <span title="{{stuData.Name}}">{{stuData.Name}}</span>
+        </li>
+      </ul>
+      <div class="newsList pull-right">
+        <ul>
+          <li ng-repeat="stuData in studyData.ListData">
+            <a href="#/articleDetail/{{stuData.Id}}" target="_blank" class="clearfix">
+              <img src="images/title_pic01.png" alt=""><span title="{{stuData.Name}}">{{stuData.Name}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .tmNewsInformation{
+    height: 198px;
+    overflow: hidden;
+    color:#666;
+  }
+  .tmNewsInformation .main_header_3 .news_1{
+    margin-right: 14px;
+  }
+  .tmNewsInformation .main_header_3 .news_1,.tmNewsInformation .main_header_3 .news_2{
+    display: inline-block;
+    height: 26px;
+    width:126px;
+    text-align: center;
+    background: url(images/tab_bg_02.png);
+    cursor: pointer;
+  }
+  .tmNewsInformation .main_header_3 span.activeTab{
+    background: url(images/tab_bg_01.png);
+    color: #fff;
+    width:129px;
+  }
+  .tmNewsInformation .newsBox{
+    width: 452px;
+    height: 159px;
+  }
+  .tmNewsInformation .newsPic{
+    width: 232px;
+    height:157px;
+  }
+  .tmNewsInformation .newsPic > li{
+    position: relative;
+  }
+  .tmNewsInformation .newsPic span{
+    position: absolute;
+    left: 0;
+    top: 137px;
+    width: 232px;
+    padding:0 16px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    background: rgba(0,0,0,.7);
+    background: #000\9;
+    filter: alpha(opacity=70);
+    color: #fff;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .tmNewsInformation .newsList{
+    width: 218px;
+    height:157px;
+    background: #F2F2F1;
+    overflow: hidden;
+  }
+  .tmNewsInformation .newsList li{
+    height: 32px;
+    line-height: 25px;
+    border-bottom: 1px solid #d7d7d7;
+  }
+  .tmNewsInformation .newsList li span{
+    display: inline-block;
+    width: 180px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .tmNewsInformation .newsList li span,.tmNewsInformation .newsList li img{
+    vertical-align: middle;
+  }
+  .tmNewsInformation .newsList li img{
+    margin: 0 10px;
+  }
+</style>
+<script>
+  $(function () {
+    $(".main_header_3 span").click(function () {
+      var index = $(this).index();
+      //console.log(index);
+      $(this).addClass("activeTab").siblings(".main_header_3 span").removeClass("activeTab");
+      //$(".newsBoxTab > div").eq(index).show().siblings(".newsBoxTab > div").hide();
+    })
+  })
+</script>

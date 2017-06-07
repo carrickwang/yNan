@@ -1,0 +1,55 @@
+<div class="searchResult">
+    <div>
+        <!--<p ng-show="!paginationConf.totalItems" class="result">暂无数据</p>-->
+        <p ng-show="!searchList.Count" class="result">暂无数据</p>
+        <div ng-show="searchList.Count" class="mar_top_15" dw-loading="tmsearchresult">
+            <!--<ul class="col-md-offset-1">
+                <li class="news" ng-repeat="newsData in searchList.ListData">
+                    <a href="#/articleDetail/{{newsData.Id}}" target="_blank">{{newsData.Name}}</a></li>
+            </ul>-->
+          <table class="table">
+            <tr>
+              <th>序号</th>
+              <th class="titleName">名称</th>
+              <th>类型</th>
+              <th>创建时间</th>
+            </tr>
+            <tr ng-repeat="rearchData in searchList.ListData">
+              <td>{{$index+1}}</td>
+              <td class="contentName">
+                <a ng-if="rearchData.Type =='Notice'" href="#/noticeDetail/{{rearchData.Id}}" target="_blank" title="{{rearchData.Name}}">{{rearchData.Name}}</a>
+                <a ng-if="rearchData.Type =='Article'" href="#/articleDetail/{{rearchData.Id}}" target="_blank" title="{{rearchData.Name}}">{{rearchData.Name}}</a>
+              </td>
+              <td><span ng-if="rearchData.Type =='Notice'">通知</span><span ng-if="rearchData.Type =='Article'">文章</span></td>
+              <td>{{rearchData.CreateDate | dateFilter | date:'yyyy/MM/dd-HH:mm:ss'}}</td>
+            </tr>
+          </table>
+          <div tm-pagation conf="paginationConf"></div>
+        </div>
+
+    </div>
+</div>
+<style>
+  .result{
+    font-size: 36px;
+    text-align: center;
+    margin-top: 80px;
+    color: #ff2222;
+  }
+  .searchResult table th.titleName{
+    width: 600px;
+  }
+  .searchResult table th,.searchResult table td{
+    text-align: center;
+  }
+  .searchResult table td.contentName {
+    text-align: left;
+  }
+  .searchResult table td.contentName > a{
+    display: inline-block;
+    width: 550px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

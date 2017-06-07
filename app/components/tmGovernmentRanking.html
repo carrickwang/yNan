@@ -1,0 +1,103 @@
+<!--单位排行-->
+<div class="govermentRanking border_1">
+  <div class="main_header_1">
+    <img src="images/header.png" alt=""><span>机构排行榜</span>
+    <i><a href="#/rankingdetail/governmentRanking">更多>></a></i>
+  </div>
+  <div class="title text-center">
+    <span class="rank1">排名</span>
+    <span class="rank2">机构名称</span>
+    <span class="rank3">平均学分</span>
+  </div>
+  <ul class="rankingList text-center"  id="rankingList" dw-loading="rankingList">
+    <li ng-repeat="rankingData in govermentRanking.ListData" repeat-finish="changeBg()">
+      <span class="list1"><span class="list1_bg xxxx">{{$index+1}}</span></span>
+      <span class="list2" title="{{rankingData.DepartmentName}}">{{rankingData.DepartmentName}}</span>
+      <span class="list3">{{rankingData.Average}}</span>
+    </li>
+  </ul>
+</div>
+<style>
+  .govermentRanking {
+    background-color: #fff;
+    height: 294px;
+    width: 272px;
+    overflow: hidden;
+  }
+  .govermentRanking .title{
+    height: 35px;
+    line-height:35px;
+    background: #edf3fc;
+  }
+  .govermentRanking .list1_bg{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #d4dddf;
+    border-radius: 4px;
+    line-height: 16px;
+  }
+  .govermentRanking .list1_bg_pic1{
+    display: inline-block;
+    background: url(images/first_bg.png) no-repeat center center;
+    width: 24px;
+    height: 22px;
+  }
+  .govermentRanking .list1_bg_pic2{
+    display: inline-block;
+    background: url(images/second_bg.png) no-repeat center center;
+    width: 24px;
+    height: 22px;
+  }
+  .govermentRanking .list1_bg_pic3{
+    display: inline-block;
+    background: url(images/third_bg.png) no-repeat center center;
+    width: 24px;
+    height: 22px;
+  }
+  .govermentRanking .title .rank1,.govermentRanking .rankingList .list1{
+    display: inline-block;
+    width: 52px;
+  }
+  .govermentRanking .title .rank2,.govermentRanking .rankingList .list2{
+    display: inline-block;
+    width: 136px;
+
+  }
+  .govermentRanking .rankingList .list2{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    text-align: left;
+  }
+  .govermentRanking .rankingList .list1,.govermentRanking .rankingList .list2,.govermentRanking .rankingList .list3{
+    vertical-align: middle;
+  }
+  .govermentRanking .title .rank3,.govermentRanking .rankingList .list3{
+    display: inline-block;
+    width: 72px;
+  }
+  .govermentRanking .rankingList > li{
+    height: 25px;
+    line-height:25px;
+  }
+  .red{
+    background: #f00;
+  }
+  .textYellow{
+    color:#FFD100;
+  }
+  .textgray{
+    color:#C4D4D5;
+  }
+  .textBrown{
+    color:#BE9897;
+  }
+</style>
+<script>
+  /*$(function(){
+    $(".rankingList li:eq(0) .list1 span").removeClass("list1_bg").addClass("list1_bg_pic1").html("");
+    $(".rankingList li:eq(1) .list1 span").removeClass("list1_bg").addClass("list1_bg_pic2").html("");
+    $(".rankingList li:eq(2) .list1 span").removeClass("list1_bg").addClass("list1_bg_pic3").html("");
+  })*/
+</script>

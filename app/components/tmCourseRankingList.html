@@ -1,0 +1,106 @@
+<!--课程点击排行-->
+<div class="courseRankingList border_1"  dw-loading="courseRankingList">
+  <div class="main_header_1">
+    <img src="images/header.png" alt=""><span>课件点击排行榜</span>
+    <i class="link_more"><a href="#/rankingdetail/courseRanking">更多>></a></i>
+  </div>
+  <div class="title text-center">
+    <span class="rank1">排名</span>
+    <span class="rank2">课件名称</span>
+    <span class="rank3">点击次数</span>
+  </div>
+  <ul class="rankingList text-center">
+    <li ng-repeat="rankingData in courseRankingList.ListData" repeat-finish="changeBg()">
+      <span class="list1"><span  class="list1_bg">{{$index+1}}</span></span>
+      <span class="list2"><a href="#/courseCenter/courseDetails/{{rankingData.Id}}" target="_blank" title="{{rankingData.Name}}">{{rankingData.Name}}</a></span>
+      <span class="list3">{{rankingData.Total}}</span>
+    </li>
+  </ul>
+</div>
+<style>
+  .courseRankingList {
+    background-color: #fff;
+    height: 294px;
+    width: 272px;
+    overflow: hidden;
+  }
+  .courseRankingList .title{
+    height: 35px;
+    line-height:35px;
+    background: #edf3fc;
+  }
+  .courseRankingList .list1_bg{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #d4dddf;
+    border-radius: 4px;
+    line-height: 16px;
+  }
+  .courseRankingList .list1_bg_pic1{
+    display: inline-block;
+    background: url(images/first_bg.png) no-repeat center center;
+    width: 24px;
+    height: 22px;
+  }
+  .courseRankingList .list1_bg_pic2{
+    display: inline-block;
+    background: url(images/second_bg.png) no-repeat center center;
+    width: 24px;
+    height: 22px;
+  }
+  .courseRankingList .list1_bg_pic3{
+    display: inline-block;
+    background: url(images/third_bg.png) no-repeat center center;
+    width: 24px;
+    height: 22px;
+  }
+  .courseRankingList .title .rank1,.courseRankingList .rankingList .list1{
+    display: inline-block;
+    width: 52px;
+  }
+  .courseRankingList .title .rank2,.courseRankingList .rankingList .list2{
+    display: inline-block;
+    width: 136px;
+
+  }
+  .courseRankingList .rankingList .list2{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    text-align: left;
+  }
+  .courseRankingList .rankingList .list1,.courseRankingList .rankingList .list2,.courseRankingList .rankingList .list3{
+    vertical-align: middle;
+  }
+  .courseRankingList .title .rank3,.courseRankingList .rankingList .list3{
+    display: inline-block;
+    width: 72px;
+  }
+  .courseRankingList .rankingList > li{
+    height: 25px;
+    line-height:25px;
+  }
+  .courseRankingList .rankingList a {
+    text-decoration: none;
+  }
+  .courseRankingList .rankingList a:visited {
+
+  }
+  .textYellow{
+    color:#FFD100;
+  }
+  .textGray{
+    color:#C4D4D5;
+  }
+  .textBrown{
+    color:#BE9897;
+  }
+</style>
+<script>
+ /* $(function(){
+    $(".courseRankingList .list1:eq(0) span").removeClass("list1_bg").addClass("list1_bg_pic1").html("");
+    $(".courseRankingList .list1:eq(1) span").removeClass("list1_bg").addClass("list1_bg_pic2").html("");
+    $(".courseRankingList .list1:eq(2) span").removeClass("list1_bg").addClass("list1_bg_pic3").html("");
+  })*/
+</script>

@@ -1,0 +1,80 @@
+<!--@*培训班分类*@-->
+<div class="courseClassify panel-group tmBorder-blue">
+  <div class="titlebg2">
+    <div class="txt">
+      {{courseClassify.TitleNav}}
+    </div>
+  </div>
+  <div class="panel panel-default" dw-loading="courseClassify" ng-repeat="courseList in courseClassify.ListData" repeat-finish="repeatDone()">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a href="javascript:;" ng-click="getClassList({categoryId:courseList.Id})">
+          <span ng-show="courseList.Nodes" class="category">+</span>
+          {{courseList.Name}}
+        </a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse">
+      <div class="panel-body">
+        <ul>
+          <li ng-repeat="list in courseList.Nodes"><a href="javascript:;" ng-click="getClassList({categoryId:list.Id})">{{list.Name}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .courseClassify .panel{
+    border:0;
+  }
+  .courseClassify .panel .panel-heading{
+    background-color: #fff;
+    padding:0 20px;
+  }
+  .courseClassify .panel .panel-heading .category{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid #0f0f0f;
+    font-size: 15px;
+  }
+  /*.courseClassify .panel .panel-heading .category2{
+    display: none;
+  }*/
+  .courseClassify .panel .panel-heading a{
+    display: inline-block;
+    text-align: left;
+    font-size:15px;
+    color: #0f0f0f;
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+  }
+  .courseClassify .panel a:hover{
+    background-color: #f1f1f1;
+    color: #0f0f0f;
+  }
+
+  .courseClassify .panel .panel-body {
+    padding:0;
+  }
+  .courseClassify.panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group {
+    border-top: none;
+  }
+  .courseClassify .panel .panel-body li {
+    margin-left: 35px;
+    height: 36px;
+  }
+  .courseClassify .panel .panel-body li a{
+    display: inline-block;
+    padding:7px;
+    width: 200px;
+  }
+</style>
+<script>
+</script>
+
+

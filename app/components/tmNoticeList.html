@@ -1,0 +1,52 @@
+<div class="noticeList border_1 tmBorder-blue">
+  <ol class="breadcrumb">
+    <li class="currentPosition">您的当前位置:</li>
+    <li><a href="#/main">首页</a></li>
+    <li class="active"><span>通知列表</span></li>
+  </ol>
+  <div>
+    <div class="noticeListHeader" >
+      <h1>通知列表</h1>
+    </div>
+    <table class="table">
+      <tr class="titleBg">
+        <th class="titleName">通知名称</th>
+        <th class="titleData">创建时间</th>
+      </tr>
+      <tr ng-repeat="listData in noticeListData.ListData">
+        <td><a class="titleName" href="#/noticeDetail/{{listData.Id}}" title="{{listData.Name}}">{{listData.Name}}</a></td>
+        <td class="text-center">{{listData.CreateDate | dateFilter | date:'yyyy/MM/dd-hh:mm:ss'}}</td>
+      </tr>
+    </table>
+    <div tm-pagation conf="paginationConf"></div>
+  </div>
+</div>
+<style>
+  .noticeListHeader > h1{
+    line-height: 49px;
+    padding-left: 49px;
+    font-size: 22px;
+    color: rgb(51,51,51);
+    margin-top: -20px;
+  }
+  .noticeList table th{
+    text-align: center;
+    font-weight: bold;
+
+  }
+  .noticeList table th.titleName{
+    width: 500px;
+  }
+  .noticeList table td >a.titleName{
+    display: inline-block;
+    width: 480px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .noticeList .titleBg{
+    background: #edf3fc;
+
+  }
+</style>
+

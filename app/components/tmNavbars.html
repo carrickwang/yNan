@@ -1,0 +1,94 @@
+<div class="navbg">
+  <div class="logo_pic">
+    <img src="images/logo.png" alt="">
+    <p class="first_p">主办单位：云南省人力资源和社会保障厅</p>
+    <p>承办单位：云南开放大学</p>
+  </div>
+  <div class="search">
+    <span class="white">站内搜索</span>
+    <input type="text" ng-model="searchText" ng-focus="hideTip()" my-placeholder placeholder="输入关键字">
+    <span class="pad_left_23 point" ng-click="searchNow()">搜索</span>
+    <span class="tipText">{{tipText}}</span>
+  </div>
+  <ul class="top_nav">
+    <li role="presentation"><a href="#/main">首页</a></li>
+    <li role="presentation"><a href="#/articleList/781338">新闻资讯</a></li>
+    <li role="presentation"><a href="#/courseCenter">培训资源</a></li>
+    <li role="presentation"><a href="#/personalCenter">个人中心</a></li>
+    <li role="presentation"><a href="#/testCenter">在线考试</a></li>
+    <li role="presentation"><a href="#/articleList/25640">政策法规</a></li>
+    <li role="presentation"><a href="#/articleList/41570">常见问题</a></li>
+    <li role="presentation" class="welcome">云南省技能在线学习平台欢迎您！</li>
+  </ul>
+</div>
+<style>
+
+  .navbg {
+    margin: 0 auto;
+    text-align: center;
+    height: 226px;
+    background: url("images/top_bg.png") no-repeat;
+  }
+  .navbg .logo_pic{
+    float: left;
+    margin:65px 0 0 42px;
+  }
+  .navbg .logo_pic p{
+    text-align: left;
+    text-indent: 6px;
+  }
+  .navbg .logo_pic p.first_p{
+    margin-top: 16px;
+  }
+  .navbg .search{
+    position: relative;
+    float: left;
+    margin: 173px 0 0 54px;
+  }
+  .navbg .search input{
+    border: none;
+    width: 172px;
+    background: transparent;
+    outline: none;
+    padding-left: 10px;
+  }
+  .navbg .top_nav{
+    float: left;
+    margin-top: 3px;
+    margin-left: 45px;
+  }
+  .navbg .top_nav >li{
+    float: left;
+    line-height: 30px;
+    padding: 0 28px;
+    color:#fff;
+  }
+  .navbg .top_nav >li.welcome{
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .navbg .top_nav >li>a{
+    color:#fff;
+    display: inline-block;
+  }
+  .navbg .top_nav >li.active{
+    background: #3B3E36;
+    border-radius: 6px;
+  }
+  .navbg .tipText{
+    position: absolute;
+    color: #f00;
+    font-weight: bold;
+    top: 0;
+    left: 140px;
+  }
+</style>
+<script>
+  $(function () {
+    /*var loac = window.location.hash.split('/');
+    var hash = loac[0]+'/'+loac[1];*/
+    var hash = window.location.hash;
+    var aActive = $('.navbg .top_nav li a[href="'+hash+'"]');
+    aActive.parent('li').addClass('active');
+  });
+</script>

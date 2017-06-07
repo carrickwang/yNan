@@ -1,0 +1,38 @@
+<!--@*通知公告*@-->
+
+<div class="noticeAnnouncement border_1">
+    <div class="main_header_2">
+      <img src="images/header.png" alt=""><span>通知公告<!--{{noticeData.TitleNav}}--></span><i class="link_more"><a href="#/noticelist">更多>></a></i>
+    </div>
+    <div class="noticeList" dw-loading="noticeAnnouncement">
+      <ul>
+        <li ng-repeat="noticeData in noticeData.ListData">
+          <span class="dot"></span><a href="#/noticeDetail/{{noticeData.Id}}" title="{{noticeData.Name}}" target="_blank">{{noticeData.Name}}</a>
+        </li>
+      </ul>
+    </div>
+</div>
+
+<style>
+.noticeAnnouncement {
+  height: 198px;
+  background: #fff url(images/notice_pic.png) no-repeat center bottom;
+}
+.noticeAnnouncement .noticeList {
+  margin-top: 10px;
+}
+.noticeAnnouncement .noticeList ul{
+  height: 88px;
+  overflow: hidden;
+}
+.noticeAnnouncement .noticeList a{
+  display: inline-block;
+  width: 210px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.noticeAnnouncement .noticeList a,.noticeAnnouncement .noticeList span{
+  vertical-align: middle;
+}
+</style>

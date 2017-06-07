@@ -1,0 +1,55 @@
+<!--引导性培训-->
+<div class="guideTraining">
+  <div class="main_header_4">
+    <span>引导性培训</span>
+    <i><a href="#/courseCenter/2">更多>></a></i>
+  </div>
+  <div class="guideTrainingList clearfix">
+    <ul class="mar_top_15">
+      <li ng-repeat="gCourseData in guideCourseData.ListData">
+        <img ng-src="{{guideCourseData.ImageCourse+'/'+gCourseData.Img}}" err-src="images/notFound.jpeg">
+        <span title="{{gCourseData.Name}}">{{gCourseData.Name}}</span>
+        <a href="#/courseCenter/courseDetails/{{gCourseData.Id}}"><img src="images/song_logo.png" alt=""></a>
+        <a href="#/courseCenter/courseDetails/{{gCourseData.Id}}">试看</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<style>
+  .guideTraining{
+    height:194px;
+  }
+  .guideTraining .guideTrainingList{
+    height:158px;
+    border: 1px solid #e5e5e5;
+    border-top: none;
+    overflow: hidden;
+  }
+  .guideTraining ul{
+    padding-left: 8px;
+    height: 136px;
+    overflow: hidden;
+  }
+  .guideTraining ul > li{
+    width: 170px;
+    height: 136px;
+    margin-right: 5px;
+    line-height: 32px;
+    float: left;
+   }
+  .guideTraining ul > li >img{
+    display: block;
+    width: 170px;
+    height: 106px;
+  }
+  .guideTraining ul > li > span {
+    display: inline-block;
+    width: 110px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .guideTraining ul > li > span, .guideTraining ul > li > a{
+    vertical-align: middle;
+  }
+</style>

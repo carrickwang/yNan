@@ -1,0 +1,58 @@
+<div class="tip" ng-show="showTip">
+  <div class="title">
+    <span>您有 <span>{{unReadNoticeList.length}}</span> 条未读消息！</span>
+    <a class="pull-right" ng-click="closeTip()">×</a>
+  </div>
+  <!--<p>
+    <a href="#/noticeDetail/{{unReadNoticeList[0].Id}}">{{unReadNoticeList[0].Name}}</a>
+  </p>-->
+  <ol>
+    <li ng-repeat="unReadList in unReadNoticeList">
+      <a href="#/noticeDetail/{{unReadList.Id}}">{{$index+1}}、{{unReadList.Name}}</a>
+    </li>
+  </ol>
+</div>
+<style>
+  .tip {
+    transition: all linear 0.5s;
+    width: 150px;
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 104px;
+    position: fixed;
+    bottom: 0px;
+  }
+  /*.animate-show {
+    transition: all linear 0.5s;
+    width: 150px;
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 104px;
+    bottom: 0px;
+    display: none;
+  }
+
+  .animate-show.ng-hide-add,
+  .animate-show.ng-hide-remove {
+    display:block!important;
+  }
+
+  .animate-show.ng-hide {
+    bottom: -104px;
+  }*/
+
+  .tip .title{
+    background-color: #D71E24;
+    color: #fff;
+  }
+  .tip .title a{
+    color: #fff;
+    padding: 0 5px 0 5px;
+  }
+  .tip ol li{
+    width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

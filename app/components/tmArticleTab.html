@@ -1,0 +1,84 @@
+<!--首页文章类型切换-->
+<div class="articleTab">
+  <div class="articleTabTitle">
+    <span ng-click="three_tab({CategoryId: 25640})" class="title1 active">政策法规</span>
+    <span ng-click="three_tab({CategoryId: 25653})" class="title2">综合动态</span>
+    <span ng-click="three_tab({CategoryId: 41570})" class="title3">常见问题</span>
+  </div>
+  <div class="articleList border_1">
+    <div class="articleList1 listActive">
+      <ul>
+        <li ng-repeat="policyData in policyData.ListData">
+          <img src="images/arrow.png" alt=""><a href="#/articleDetail/{{policyData.Id}}" title="{{policyData.Name}}">{{policyData.Name}}</a><span>{{policyData.CreateDate | dateFilter | date:'yyyy/MM/dd'}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<style>
+  .articleTab{
+    width: 100%;
+    height: 200px;
+    color: #666;
+
+  }
+  .articleTab .articleTabTitle span{
+    display: inline-block;
+    width: 151px;
+    text-align: center;
+    background: url(images/tab_bg_white01.png) no-repeat center center;
+    height: 26px;
+    line-height:26px;
+    margin: 0 -2px;
+    cursor: pointer;
+  }
+  .articleTab .articleTabTitle span.title1{
+    margin: 0 -1px;
+  }
+  .articleTab .articleTabTitle span.title2{
+    margin-left: -3px;
+  }
+  .articleTab .articleTabTitle span.active{
+    background: url(images/tab_bg_red01.png) no-repeat center center;
+    color: #fff;
+  }
+  .articleList{
+    height: 173px;
+    width: 100%;
+  }
+  .articleList > div{
+    display: none;
+    margin-top: 10px;
+  }
+  .articleList > div img{
+    margin: 0 12px;
+  }
+  .articleList > div li{
+    height:26px;
+    line-height:26px;
+  }
+  .articleList > div.listActive{
+    display: block;
+  }
+  .articleList ul > li a{
+    display: inline-block;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 70px;
+  }
+  .articleList > div img,.articleList ul > li a{
+    vertical-align: middle;
+  }
+</style>
+<script>
+  $(function () {
+    $(".articleTab .articleTabTitle span").click(function () {
+      var index = $(this).index();
+      //console.log(index);
+      $(this).addClass("active").siblings(".articleTab .articleTabTitle span").removeClass("active");
+      //$(".articleList > div").eq(index).show().siblings(".articleList > div").hide();
+    })
+  })
+</script>

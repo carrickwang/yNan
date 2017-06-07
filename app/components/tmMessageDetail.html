@@ -1,0 +1,53 @@
+<!--留言板详情-->
+<div class="messageListDetail tmBorder-green">
+  <ol class="breadcrumb">
+    <li class="currentPosition">您的当前位置:</li>
+    <li><a href="#/main">首页</a></li>
+    <li><a href="#/personalCenter">留言板</a></li>
+    <li class="active">{{messageDetailData.TitleNav}}</li>
+  </ol>
+  <div class="myTab" dw-loading="studyPlan">
+    <div class="tab-content" dw-loading="messageListDetail">
+      <div class="tab-panel perlist">
+        <div class="title_bar clearfix">
+          <h3>{{messageDetailData.TitleNav}}</h3>
+        </div>
+        <div class="list">
+          <p class="clearfix">
+            <span class="list1">标题：{{messageDetailData.Model.Name}}</span>
+          </p>
+          <p class="clearfix">
+            <span class="list1">分类：{{messageDetailData.Model.Class}}</span>
+          </p>
+          <p class="clearfix">
+            <span class="list1">时间：{{messageDetailData.Model.CreateDate | dateFilter | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+          </p>
+          <p class="clearfix">
+            <span class="list1">作者：{{messageDetailData.Model.UserName}}</span>
+          </p>
+          <p class="clearfix">
+            <span class="list1">留言内容：{{messageDetailData.Model.Content}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<style>
+  .messageListDetail .myTab h3{
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .myTab .perlist .list1 {
+    width: 100%;
+    height: 37px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .myTab .perlist .list .list1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+</style>

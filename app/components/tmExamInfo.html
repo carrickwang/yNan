@@ -1,0 +1,36 @@
+<!--@*考试信息*@-->
+<div class="examInfo border_1">
+  <div class="main_header_2">
+    <img src="images/header.png" alt=""><span>考试信息</span><i class="link_more"><a href="#/articleList/85">更多>></a></i>
+  </div>
+  <div class="examList" dw-loading="examInfo">
+    <ul>
+      <li ng-repeat="examData in examData.ListData">
+        <span class="dot"></span><a href="#/articleDetail/{{examData.Id}}" target="_blank" title="{{examData.Name}}">{{examData.Name}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .examInfo {
+    height: 198px;
+    background: #fff;
+  }
+  .examInfo .examList {
+    margin-top: 10px;
+  }
+  .examInfo .examList a{
+    text-decoration: none;
+    display: inline-block;
+    width: 210px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    vertical-align: middle;
+  }
+  .examInfo .examList a:visited{
+    color: inherit;
+  }
+</style>
+

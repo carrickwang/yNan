@@ -1,0 +1,61 @@
+<div class="rankingDetail border_1 tmBorder-blue">
+  <ol class="breadcrumb">
+    <li class="currentPosition">您的当前位置:</li>
+    <li><a href="#/main">首页</a></li>
+    <li class="active"><span ng-show="govermentRanking">机构排行榜</span><span ng-show="courseRankingList">课件点击排行榜</span></li>
+  </ol>
+  <div ng-show="govermentRanking">
+    <div class="rankingDetailHeader" >
+      <h1>机构排行榜</h1>
+    </div>
+    <table class="table">
+      <tr class="titleBg">
+        <th class="titleOrder">排名</th>
+        <th class="titleName">机构名称</th>
+        <th class="titleMark">平均学分</th>
+      </tr>
+      <tr ng-repeat="listData in govermentRanking.ListData">
+        <td class="text-center">{{$index+1}}</td>
+        <td>{{listData.DepartmentName}}</td>
+        <td class="text-center">{{listData.Average}}</td>
+      </tr>
+    </table>
+  </div>
+  <div ng-show="courseRankingList">
+    <div class="rankingDetailHeader">
+      <h1>课件点击排行榜</h1>
+    </div>
+    <table class="table">
+      <tr class="titleBg">
+        <th class="titleOrder">排名</th>
+        <th class="titleName">机构名称</th>
+        <th class="titleMark">平均学分</th>
+      </tr>
+      <tr ng-repeat="listData in courseRankingList.ListData">
+        <td class="text-center">{{$index+1}}</td>
+        <td><a href="#/courseCenter/courseDetails/{{listData.Id}}" target="_blank" title="{{listData.Name}}">{{listData.Name}}</a></td>
+        <td class="text-center">{{listData.Total}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<style>
+  .rankingDetailHeader > h1{
+    line-height: 49px;
+    padding-left: 49px;
+    font-size: 22px;
+    color: rgb(51,51,51);
+    margin-top: -20px;
+  }
+  .rankingDetail table th{
+    text-align: center;
+    font-weight: bold;
+  }
+  .rankingDetail table th.titleOrder{
+    width: 120px;
+  }
+  .rankingDetail .titleBg{
+    background: #edf3fc;
+
+  }
+</style>

@@ -1,0 +1,222 @@
+<div class="playPage clearfix">
+  <div id="playBg"></div>
+  <div tm-drag options="options" drag-ready="dragReady"></div>
+  <div tm-play-mp4 class="pull-left playMp4 clearfix" ng-show="showPlay"></div>
+  <div class='toggleSideSec'></div>
+  <div class="play pull-right">
+    <div class="side_section JYTab">
+        <div class="class_info">
+          <div class="info">
+            <div class="overhide" style="font-size: 14px;color: #323232;line-height: 28px;font-weight: normal;" title="{{resultCourseDetail.Name}}">{{resultCourseDetail.Name}}</div>
+            <div style="float:left">教师：{{resultCourseDetail.Teacher}}</div>
+            <div style="float:right">时长：{{resultCourseDetail.Duration}}</div>
+            <div style="clear:both"><span><a href="#"></a></span></div>
+          </div>
+          <span class="star" style="background-position-x: -{{resultCourseDetail.StudentGrade*121}}px;"></span><span>{{resultCourseDetail.StudentGrade}}</span>
+          <div id="BrowseScore">
+            <span>课程进度：</span>
+            <span class="jd_box">
+              <span class="jd_bg" ng-style="{'width':resultCourseDetail.BrowseScore+'%'};">&nbsp;</span>
+            </span>
+            <span>{{resultCourseDetail.BrowseScore}}%</span>
+          </div>
+          <hr style="margin-top:3px;" />
+          <div style="color:#656565;margin-top:4px; font-size: 12px; word-spacing: 4px; text-align: justify;">课程描述：{{resultCourseDetail.Description}}</div>
+        </div>
+        <!--标签页-->
+        <div class="myTab">
+          <ul class="nav nav-tabs" ng-init="vm.activeTab=1">
+            <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1;searchMyCenterCourse({'examType':'UnFinish','title':searchTitle})"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;笔记</a></li>
+            <li ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeTab = 2;searchMyCenterCourse({'examType':'Finish','title':searchTitle})"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;评论</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-panel perlist" ng-show="vm.activeTab == 1">
+              <div class="pad_left_10" style="overflow: auto;background-color: #d2d5da;">
+                <div class="slide-content">
+                  <form class="clearfix">
+                    <div class="form-group">
+                      <input ng-model="noteName" type="text" class="form-control"
+                             my-placeholder
+                             placeholder="标题">
+                    </div>
+                    <div class="form-group">
+                      <textarea ng-model="noteContent" class="form-control" rows="4"
+                                my-placeholder
+                                placeholder="请输入笔记内容...">
+
+                      </textarea>
+                    </div>
+                    <button ng-click="editNote({Name:noteName,Content:noteContent,CourseId:Id})" type="submit" class="btn btn-default pull-right">保存</button>
+                  </form>
+                  <ul class="notes" ng-repeat="courseNoteList in resultCourseNote">
+                    <li class="title">
+                      <span>标题:{{courseNoteList.Name}}</span>
+                      <span class="time" style="color:#999;font-size: 12px;float: right">{{courseNoteList.CreateDate | dateFilter | date:'yyyy-MM-dd'}}</span>
+                    </li>
+                    <li class="content">
+                      <span>{{courseNoteList.Content}}</span>
+                      <a ng-click="delNote(courseNoteList.Id)" class="btn btn-danger pull-right">删除</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="tab-panel perlist" ng-show="vm.activeTab == 2">
+              <div class="pad_left_10" style="overflow: auto;">
+                <div class="wrapper">
+                  <span tm-star-box ng-model="drLevel"></span>
+                  <span style="float: left;margin: 7px 0 0 20px;">{{ratingText}}</span>
+                  </div>
+                </div>
+                <form class="clearfix">
+                  <div class="form-group">
+                    <textarea ng-model="comment" class="form-control" rows="4"
+                              my-placeholder
+                              placeholder="请输入评论内容...">
+
+                    </textarea>
+                  </div>
+                  <button ng-click="editComment({rate:drLevel,content:comment,mainId:Id})" type="submit" class="btn btn-default pull-right">保存</button>
+                </form>
+
+                <ul class="notes" ng-repeat="commentList in resultComment.ListData">
+                  <li class="title">
+                    <span>用户:{{commentList.UserName}}</span>
+                    <span class="time" style="color:#999;font-size: 12px;float: right">{{commentList.CreateDate | dateFilter | date:'yyyy-MM-dd'}}</span>
+                  </li>
+                  <li class="content">
+                    <span>{{commentList.Comment}}</span>
+                  </li>
+                </ul>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="preventorgery"></div>
+</div>
+<style>
+  .playPage{
+    height: 100%;
+  }
+  .play{
+    display: none;
+    position: relative;
+    height: 100%;
+    width: 20%;
+  }
+  .playMp4{
+    width: 99%;
+    position: relative;
+    height: 100%;
+    /*right:324px;*/
+    /*left: 10%;
+    top:10%;*/
+    /*margin-bottom:56.25%;*/
+  }
+  #playBg{
+    display: block;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1002;
+    opacity: 0.4;
+  }
+  .toggleSideSec {
+    width: 12px;
+    height: 83px;
+    cursor: pointer;
+    display: inline-block;
+    background: url(images/1.jpg);
+    margin-top: 250px;
+    position: absolute;
+    z-index: 1000;
+    /*right: 314px;*/
+    right: 0;
+  }
+  .side_section {
+    /*display: none;*/
+    background: #d2d5da;
+    width: 324px;
+    height: 100%;
+    /*position: absolute;*/
+    z-index: 1001;
+    /*right: 0;*/
+    /*top: 0;*/
+  }
+
+
+  .class_info {
+    background: #d2d5da;
+    min-height: 100px;
+    padding: 14px 10px;
+  }
+  .class_info .info {
+    width: 270px;
+    color: #656565;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  .overhide {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+  }
+  .class_info .star {
+    color: #cadc03;
+    display: inline-block;
+  }
+
+
+  .play .myTab .nav li{
+    background-color: #d2d5da;
+  }
+  .play .myTab .nav{
+    margin-left: 10px;
+  }
+  .play .myTab .tab-content{
+    overflow: hidden;
+    /*max-height: 530px;*/
+  }
+  .play .myTab .notes li{
+    padding: 5px 0;
+  }
+  .play .myTab .notes li a{
+    padding: 1px 12px;
+  }
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #fff;
+    cursor: default;
+    background-color: #999a9b;
+    border: 1px solid #999a9b;
+    border-bottom-color: transparent;
+  }
+  .notes {
+    clear: both;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 10px;
+  }
+
+  #star {
+    overflow: hidden;
+    width: 121px;
+    height: 18px;
+    margin-right: 14px;
+    float: left;
+    margin-top: 6px;
+    background: url(images/star_all.gif) 0 0 no-repeat;
+    cursor: pointer;
+  }
+  .wrapper {
+    height: 30px;
+  }
+  #result {
+    display: inline-block;
+    margin-top: 6px;
+  }
+</style>
+

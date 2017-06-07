@@ -1,0 +1,212 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name luZhouApp.controller:CoursecenterCtrl
+ * @description
+ * # CoursecenterCtrl
+ * Controller of the luZhouApp
+ */
+angular.module('luZhouApp')
+	.controller('CoursecenterCtrl', function($scope, $rootScope, $cookieStore, commonService, $timeout, $loading, $routeParams) {
+		//判断能否访问
+		commonService.isVisit();
+		//保持在线
+		commonService.keepOnline();
+		$scope.showInput1 = true;
+		$scope.showInput2 = false;
+		$scope.showInput3 = false;
+		//显示loading
+		$loading.start('courseClassify');
+		//课程分类
+		commonService.getData(ALL_PORT.CourseCategory.url,'POST',ALL_PORT.CourseCategory.data)
+			.then(function(response) {
+				$loading.finish('courseClassify');
+				$scope.courseClassify = response.Data;
+			});
+
+		//折叠面板控制
+		$scope.repeatDone = function() {
+			$('.courseClassify .panel-title a').click(function() {
+				$(this).parents('.panel-heading').next().slideToggle();
+				if ($(this).children('.category').html() == '+') {
+					$(this).children('.category').html('-');
+				} else {
+					$(this).children('.category').html('+');
+				}
+			});
+		};
+
+        //课程超市列表
+        //搜索
+        $scope.selectText = [
+            { name: '课程名称', id: '1' },
+            { name: '课程类型', id: '2' },
+            { name: '主讲人', id: '3' }
+        ];
+        $scope.videoType = [
+            { name: '所有类型', id: 'All' },
+            { name: '三分屏', id: 'ThreeScreenCourse' },
+            { name: '单视频', id: 'SingleCourse' },
+            { name: '动画类', id: 'AnimationCourse' }
+        ];
+        var courseListParams = {
+            page: 1,
+            rows: 10,
+            sort: 'Sort',
+            order: 'desc',
+            courseType: 'All',
+            channelId: '',
+            title: '',
+            titleNav: '课程超市',
+            wordLimt: 35,
+            teacher: ''
+        };
+        $scope.paginationConf = {
+            currentPage: 1,
+            totalItems: 100,
+            itemsPerPage: 20, //每页显示的条数
+            pagesLength: 6,
+            perPageOptions: [10, 20, 30, 40, 50],
+        };
+        //搜索方法
+      // var newListParams;
+        $scope.searchCourse = function(options) {
+            $loading.start('courseSupermarket');
+            // newListParams = $.extend({}, ALL_PORT.CourseList.data, courseListParams, options);
+           $.extend(courseListParams, options);
+            // console.log(courseListParams);
+          $scope.paginationConf.currentPage=courseListParams.page;
+            commonService.getData(ALL_PORT.CourseList.url, 'POST', courseListParams)
+                .then(function(response) {
+                    $loading.finish('courseSupermarket');
+                    $scope.courseSupermarketData = response.Data;
+                    $scope.paginationConf.totalItems = response.Data.Count;
+                });
+        };
+        if ($routeParams.channelId) {
+            $scope.searchCourse({ channelId: $routeParams.channelId });
+        } else {
+            $scope.searchCourse();
+        }
+        $scope.judgement = function(id, courseType, sort,orders) {
+          var order;
+          if (orders) {
+            if(courseListParams.order=='desc'){
+              order='Asc';
+            }else if(courseListParams.order=='Asc'){
+              order='desc';
+            }
+          }else {
+            order='desc';
+          }
+          if (id == 1) {
+              $scope.showInput1 = true;
+              $scope.showInput2 = false;
+              $scope.showInput3 = false;
+              if (courseType) {
+                  $scope.searchCourse({ title: $scope.searchTitle1, courseType: courseType ,order:order});
+              } else if (courseType == null && sort) {
+                  $scope.searchCourse({ title: $scope.searchTitle1, sort: sort ,order:order});
+              } else {
+                  // $scope.searchCourse({ channelId: courseListParams.channelId, title: $scope.searchTitle1 });
+                  $scope.searchCourse({ channelId: '', title: $scope.searchTitle1 ,order:order,teacher:''});
+              }
+          } else if (id == 2) {
+              $scope.showInput1 = false;
+              $scope.showInput2 = true;
+              $scope.showInput3 = false;
+              $scope.searchCourse({ channelId: courseListParams.channelId, courseType: $scope.searchTitle2.id, sort: sort ,order:order,teacher:'',title:''});
+          } else if (id == 3) {
+              $scope.showInput1 = false;
+              $scope.showInput2 = false;
+              $scope.showInput3 = true;
+              if (courseType) {
+                  $scope.searchCourse({ title: $scope.searchTitle3, courseType: courseType ,order:order})
+              } else if (courseType == null && sort) {
+                  $scope.searchCourse({ title: $scope.searchTitle1, sort: sort ,order:order});
+              } else {
+                  $scope.searchCourse({ channelId: courseListParams.channelId, teacher: $scope.searchTitle3 ,order:order,title:'',courseType:'All'});
+              }
+          }
+        };
+
+		//分页
+		// 通过$watch currentPage 当他们一变化的时候，重新获取数据条目
+		$scope.$watch('paginationConf.currentPage', function() {
+			// 发送给后台的请求数据
+			var pageOptions = {
+				page: $scope.paginationConf.currentPage,
+			};
+			$scope.searchCourse(pageOptions);
+			//console.log($scope.paginationConf);
+		});
+		$scope.selectClass = {};
+		//防伪造请求
+		var token = commonService.AntiForgeryToken();
+
+		//全选
+		$scope.checkAll = function() {
+			$(":checkbox").each(function() {
+				if ($(this).attr("disabled") != "disabled") {
+					$(this).prop("checked", true);
+				} else {}
+			});
+		}
+		//反选
+		$scope.selectInvert = function() {
+			$(":checkbox").each(function() {
+				if ($(this).attr("disabled") != "disabled") {
+					if (!$(this).prop("checked")) {
+						$(this).prop("checked", true);
+					} else {
+						$(this).prop("checked", false);
+					}
+				} else {}
+			});
+		}
+		//批量选课
+		$scope.ckBatch = function(str, page, rows) {
+			var checkedsub = $(".block1 input[type='checkbox'][name='subcheck']:checked").length; //获取选中的
+			var checkValue = "";
+			$(".block1 input[type='checkbox'][name='subcheck']:checked").each(function() {
+				if ($(this).val() !== 0) {
+					checkValue += $(this).val() + ",";
+				}
+			});
+			$scope.selectClass.checkValue = checkValue;
+			//console.log($scope.selectClass);
+			if (checkValue !== '') {
+				commonService.getData(ALL_PORT.AddStudyCourse.url,'POST',$.extend({}, ALL_PORT.AddStudyCourse.data, $scope.selectClass, token))
+					.then(function(response) {
+						if (response.Type > 0) {
+							alert(response.Message);
+							location.reload();
+						}
+					});
+			} else {
+				alert("您没有选择可添加的课程！");
+			}
+		};
+    //站内搜索
+    $scope.searchText = '';
+    $scope.tipText = '';
+    $scope.searchNow = function () {
+      if($scope.searchText ==''){
+        $scope.tipText = "输入不能为空";
+      }else{
+        $location.path('/search/' + $scope.searchText);
+      }
+    };
+    $scope.hideTip = function () {
+      $scope.tipText = "";
+    };
+
+       /*//课程点击排行(误删除)
+        $loading.start('courseRankingList');
+        commonService.getData(ALL_PORT.CourseClickRank.url, 'POST', ALL_PORT.CourseClickRank.data)
+            .then(function(response) {
+                $loading.finish('courseRankingList');
+                $scope.courseRankingList = response.Data;
+            });*/
+    });
