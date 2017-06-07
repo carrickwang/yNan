@@ -55,6 +55,9 @@ Running `grunt test` will run the unit tests with karma.
 41. securitysetting.html (设置密保) securitysetting.js
 42. unreadnotice.html (未读通知) unreadnotice.js
 43. play.html (播放页) play.js
+44. articlelist.html(文章列表) articlelist.js
+45. noticelist.html(通知列表) noticelist.js
+45. rankingdetail.html(排行更多) rankingdetail.js
 
 ## directives(组件指令) => components(组件)
 
@@ -126,6 +129,10 @@ Running `grunt test` will run the unit tests with karma.
 66. tmtip.js =>tmTip.html(未读通知小提示)
 67. tmtrainingcenter.js =>tmTrainingCenter.html(专题培训班)
 68. tmunreadnotice.js =>tmUnReadNotice.html(未读通知)
+69. tmarticlecategory.js =>tmArticleCategory.html(文章分类)
+70. tmarticlelist.js =>tmArticleList.html(文章列表)
+71. tmarticletab.js =>tmArticleTab.html(文章切换)
+71. tmexaminfo.js =>tmExamInfo.html(考试信息)
 
 
 ## directives(非组件指令)
