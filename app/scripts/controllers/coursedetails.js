@@ -55,8 +55,8 @@ angular.module('luZhouApp')
             commonService.getData(ALL_PORT.AddStudyCourse.url, 'POST', params)
                 .then(function(response) {
                     if (response.Type == 1) {
-                        window.open('#/play/play/' + checkValue)
-                            // $location.path('/play/play/'+checkValue);
+                        window.open('#/play/play/' + checkValue);
+                        //$location.path('/play/play/'+checkValue);
                     }
                 });
         };
