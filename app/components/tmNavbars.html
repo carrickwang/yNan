@@ -6,9 +6,9 @@
   </div>
   <div class="search">
     <span class="white">站内搜索</span>
-    <input type="text" ng-model="searchText" ng-focus="hideTip()" my-placeholder placeholder="输入关键字">
-    <span class="pad_left_23 point" ng-click="searchNow()">搜索</span>
-    <span class="tipText">{{tipText}}</span>
+    <input type="text" ng-model="$root.searchText" ng-focus="$root.hideTip()" my-placeholder placeholder="输入关键字">
+    <span class="pad_left_23 point" ng-click="$root.searchNow()">搜索</span>
+    <span class="tipText">{{$root.tipText}}</span>
   </div>
   <ul class="top_nav">
     <li role="presentation"><a href="#/main">首页</a></li>

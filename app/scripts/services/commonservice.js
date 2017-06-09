@@ -8,7 +8,7 @@
  * Service in the luZhouApp.
  */
 angular.module('luZhouApp')
-  .service('commonService', function ($http,$cookies,$cookieStore,$timeout,$location,$loading,$q,$interval) {
+  .service('commonService', function ($http,$cookies,$cookieStore,$timeout,$location,$loading,$q,$interval,$rootScope) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     //警告功能 - start
     /**
@@ -412,6 +412,20 @@ angular.module('luZhouApp')
             defer.reject(data);
         });
         return defer.promise;
-
     };
+    //站内搜索
+    this.searchAll = function () {
+      $rootScope.searchText = '';
+      $rootScope.tipText = '';
+      $rootScope.searchNow = function () {
+        if($rootScope.searchText ==''){
+          $rootScope.tipText = "输入不能为空";
+        }else{
+          $location.path('/search/' + $rootScope.searchText);
+        }
+      };
+      $rootScope.hideTip = function () {
+        $rootScope.tipText = "";
+      }
+    }
   });

@@ -40,4 +40,7 @@ angular.module('luZhouApp')
           $scope.courseRankingList = response.Data;
         });
     }
+    //站内搜索
+    commonService.searchAll();
+
   });

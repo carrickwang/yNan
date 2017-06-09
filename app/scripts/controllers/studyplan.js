@@ -83,4 +83,6 @@ angular.module('luZhouApp')
                     $scope.requestStudyPlan();
                 });
         };
+      //站内搜索
+      commonService.searchAll();
     });

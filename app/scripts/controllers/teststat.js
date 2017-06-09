@@ -57,4 +57,6 @@ angular.module('luZhouApp')
         $scope.printTestStat = function() {
             window.print();
         };
+      //站内搜索
+      commonService.searchAll();
     });

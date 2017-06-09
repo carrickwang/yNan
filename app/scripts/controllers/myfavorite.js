@@ -62,4 +62,6 @@ angular.module('luZhouApp')
                     }
                 });
         }
+      //站内搜索
+      commonService.searchAll();
     });

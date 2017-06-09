@@ -354,17 +354,6 @@ angular.module('luZhouApp')
             });
         };
       //站内搜索
-      $scope.searchText = '';
-      $scope.tipText = '';
-      $scope.searchNow = function () {
-        if($scope.searchText ==''){
-          $scope.tipText = "输入不能为空";
-        }else{
-          $location.path('/search/' + $scope.searchText);
-        }
-      };
-      $scope.hideTip = function () {
-        $scope.tipText = "";
-      }
+      commonService.searchAll();
 
     });

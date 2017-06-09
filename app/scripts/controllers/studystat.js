@@ -52,5 +52,7 @@ angular.module('luZhouApp')
             options.page = $scope.paginationConf.currentPage;
             $scope.requestMyStudyStat(options);
         });
+      //站内搜索
+      commonService.searchAll();
 
     });
