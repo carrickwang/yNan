@@ -31,7 +31,6 @@ angular.module('luZhouApp')
                 $scope.singleQuestions = response.Data.Type1Questions;
                 $scope.multipleQuestions = response.Data.Type2Questions;
                 $scope.gapFilling = response.Data.Type3Questions;
-
                 $scope.examAllScore1 = commonService.examAllScore;
 
 
