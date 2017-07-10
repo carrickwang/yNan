@@ -256,6 +256,11 @@ angular
         controller: 'noticeListCtrl',
         controllerAs: 'noticeList'
       })
+      .when('/examgrade/:ExamID', {
+        templateUrl: 'views/exam/examgrade.html',
+        controller: 'examGradeCtrl',
+        controllerAs: 'examGrade'
+      })
       .otherwise({
         redirectTo: '/main'
       });

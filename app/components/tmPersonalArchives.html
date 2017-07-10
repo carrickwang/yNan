@@ -160,6 +160,7 @@
               <th align="center">测试名称</th>
               <th align="center">测试成绩</th>
               <th align="center">获得学时</th>
+              <th align="center">成绩打印</th>
             </tr>
             </thead>
             <tbody >
@@ -168,6 +169,7 @@
               <td width="40%">{{CourseTest.ExamName}}</td>
               <td>{{CourseTest.ExamSorce}}</td>
               <td>{{CourseTest.Credit}}</td>
+              <td ng-click="getExamGrade({ExamID:CourseTest.ExamID})">打印</td>
             </tr>
             <tr>
               <td colspan="9" ><div class="mar_0_auto" tm-pagation conf="paginationConf[1]"></div></td>

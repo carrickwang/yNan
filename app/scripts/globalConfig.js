@@ -592,4 +592,9 @@ var ALL_PORT = {
     url:API_URL+"/Page/SearchAll",
     data:{}
   },
+  //成绩打印
+  ExamGrade:{
+    url:API_URL+"/Page/ExamGrade",
+    data:{}
+  }
 };

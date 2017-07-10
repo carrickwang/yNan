@@ -1,0 +1,58 @@
+<div class="scoreResult">
+  <h1>{{dataList.ExamName}}</h1>
+  <h1>成绩报告单</h1>
+  <ul>
+    <li><span>姓<span class="slot">名：</span></span><span class="result_c">{{dataList.UserName}}</span></li>
+    <li><span>单<span class="slot">位：</span></span><span class="result_c">{{dataList.UserGroup}}</span></li>
+    <li><span>考试时间：</span><span class="result_c">{{dataList.ExamTime}}</span></li>
+    <li><span>考试成绩：</span><span class="result_c">{{dataList.ExamScore}}</span></li>
+    <li><span>考核结果：</span><span class="result_c">通过</span></li>
+  </ul>
+  <div class="footer">云南省技能在线学习平台</div>
+</div>
+
+<style>
+  *{
+    padding:0;
+    margin:0;
+  }
+  body,html{
+    height: 100%;
+  }
+  ul,li{
+    list-style:none;
+  }
+  .scoreResult{
+    width: 990px;
+    margin: 0 auto;
+    background: #eee;
+    height: 100%;
+    padding-top:50px;
+  }
+  .scoreResult h1{
+    text-align: center;
+    line-height: 50px;
+    color: #252525;
+  }
+  .scoreResult ul{
+    padding-top:40px;
+    width: 400px;
+    margin:0 auto;
+  }
+  .scoreResult .footer{
+    text-align: center;
+    font-size: 24px;
+    line-height: 40px;
+    margin-top: 100px;
+  }
+  .scoreResult span{
+    font-size: 20px;
+    line-height: 40px;
+  }
+  .scoreResult span.slot{
+    margin-left: 38px;
+  }
+  .scoreResult .result_c{
+    margin-left: 20px;
+  }
+</style>

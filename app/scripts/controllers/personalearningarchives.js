@@ -35,7 +35,18 @@ angular.module('luZhouApp')
                 $scope.table_show_three = !$scope.table_show_three;
             }
         };
+      //请求成绩单数据
+        $scope.getExamGrade = function (options) {
+          commonService.getData(ALL_PORT.ExamGrade.url, 'POST',
+            $.extend({}, ALL_PORT.ExamGrade.data, options))
+            .then(function(response) {
+              if((response.Data.ExamScore-0) < 60){
+                alert("考试未通过，无法打印成绩！")
+              }
+              window.open("#/examgrade/"+options.ExamID);
 
+            });
+        }
         $scope.paginationConf = [{ //学习课程获得学时
                 currentPage: 1,
                 totalItems: 10,
