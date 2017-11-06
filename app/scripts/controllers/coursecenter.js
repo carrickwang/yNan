@@ -41,18 +41,21 @@ angular.module('luZhouApp')
         //搜索
         $scope.selectText = [
             { name: '课程名称', id: '1' },
-            { name: '课程类型', id: '2' },
-            { name: '主讲人', id: '3' }
+            { name: '课程类型', id: '2' }
+            // { name: '主讲人', id: '3' }
         ];
         $scope.videoType = [
             { name: '所有类型', id: 'All' },
-            { name: '三分屏', id: 'ThreeScreenCourse' },
+            // { name: '三分屏', id: 'ThreeScreenCourse' },
             { name: '单视频', id: 'SingleCourse' },
-            { name: '动画类', id: 'AnimationCourse' }
+            // { name: '动画类', id: 'AnimationCourse' },
+            { name: 'VR虚拟实训', id: 'VirtualCourse' },
+            { name: '多视频', id: 'MoreCourse' }
+
         ];
         var courseListParams = {
             page: 1,
-            rows: 10,
+            rows: 20,
             sort: 'Sort',
             order: 'desc',
             courseType: 'All',
@@ -117,18 +120,18 @@ angular.module('luZhouApp')
               $scope.showInput2 = true;
               $scope.showInput3 = false;
               $scope.searchCourse({ channelId: courseListParams.channelId, courseType: $scope.searchTitle2.id, sort: sort ,order:order,teacher:'',title:''});
-          } else if (id == 3) {
-              $scope.showInput1 = false;
-              $scope.showInput2 = false;
-              $scope.showInput3 = true;
-              if (courseType) {
-                  $scope.searchCourse({ title: $scope.searchTitle3, courseType: courseType ,order:order})
-              } else if (courseType == null && sort) {
-                  $scope.searchCourse({ title: $scope.searchTitle1, sort: sort ,order:order});
-              } else {
-                  $scope.searchCourse({ channelId: courseListParams.channelId, teacher: $scope.searchTitle3 ,order:order,title:'',courseType:'All'});
-              }
-          }
+           } //else if (id == 3) {
+          //     $scope.showInput1 = false;
+          //     $scope.showInput2 = false;
+          //     $scope.showInput3 = true;
+          //     if (courseType) {
+          //         $scope.searchCourse({ title: $scope.searchTitle3, courseType: courseType ,order:order})
+          //     } else if (courseType == null && sort) {
+          //         $scope.searchCourse({ title: $scope.searchTitle1, sort: sort ,order:order});
+          //     } else {
+          //         $scope.searchCourse({ channelId: courseListParams.channelId, teacher: $scope.searchTitle3 ,order:order,title:'',courseType:'All'});
+          //     }
+          // }
         };
 
 		//分页
@@ -136,7 +139,7 @@ angular.module('luZhouApp')
 		$scope.$watch('paginationConf.currentPage', function() {
 			// 发送给后台的请求数据
 			var pageOptions = {
-				page: $scope.paginationConf.currentPage,
+				page: $scope.paginationConf.currentPage
 			};
 			$scope.searchCourse(pageOptions);
 			//console.log($scope.paginationConf);
@@ -182,7 +185,9 @@ angular.module('luZhouApp')
 						if (response.Type > 0) {
 							alert(response.Message);
 							location.reload();
-						}
+						}else if(response.Type ==0){
+              alert(response.Message);
+            }
 					});
 			} else {
 				alert("您没有选择可添加的课程！");

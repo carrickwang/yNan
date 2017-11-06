@@ -24,13 +24,19 @@ angular.module('luZhouApp')
 
         var parameter1 = $routeParams.examId;
         var parameter2 = $routeParams.recordId;
+        var type = $routeParams.Type;
+        $scope.SumCount = '';
         $loading.start('examReview');
         commonService.getData(ALL_PORT.ExamReview.url, 'POST',
                 $.extend({}, ALL_PORT.ExamReview.data, { parameter1: parameter1, parameter2: parameter2 }))
             .then(function(response) {
                 $loading.finish('examReview');
                 $scope.examReviewData = response.Data;
-
+                if(type=='mock'){
+                  $scope.SumCount = response.Data.SumCount;
+                }else{
+                  $scope.SumCount = response.Data.UserExamDetail.Score;
+                }
                 $scope.checkingQuestions = response.Data.Type0Questions;
                 $scope.singleQuestions = response.Data.Type1Questions;
                 $scope.multipleQuestions = response.Data.Type2Questions;

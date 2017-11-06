@@ -1,0 +1,92 @@
+<div class="trainInfo border_1 tmBorder-blue">
+  <ol class="breadcrumb">
+    <li class="currentPosition">您的当前位置:</li>
+    <li><a href="#/main">首页</a></li>
+    <li class="active"><span>培训动态</span></li>
+  </ol>
+  <div>
+    <div class="trainInfoHeader mar_bottom_20">
+      <h1>培训动态</h1>
+    </div>
+    <form class="form-inline formCourse">
+      <select class="form-control" ng-init="selectedName = selectText[0]" ng-model="selectedName" ng-options="x.name for x in selectText"  ng-change="judgement(selectedName.id)">
+      </select>
+      <div class="form-group">
+        <input ng-show="showInput1" my-placeholder ng-model="searchTitle1" type="text" class="form-control" placeholder="请输入培训机构名称">
+        <input ng-show="showInput2" my-placeholder ng-model="searchTitle2" type="text" class="form-control" placeholder="请输入职业技能资格名称">
+        <input ng-show="showInput3" my-placeholder ng-model="searchTitle3" type="text" class="form-control" placeholder="请输入报名时间（格式：2018-01）">
+        <input ng-show="showInput4" my-placeholder ng-model="searchTitle4" type="text" class="form-control" placeholder="请输入培训时间（格式：2018-01）">
+      </div>
+      <button type="submit" class="btn btn-default" ng-click="judgement(selectedName.id)">搜索</button>
+    </form>
+    <table class="table mar_top_40">
+      <tr class="titleBg">
+        <th class="list1">培训班名称</th>
+        <th class="list1">培训机构</th>
+        <th class="list1">职业技能名称</th>
+        <th class="list2">报名时间</th>
+        <th class="list2">培训时间</th>
+        <th class="list3">内容</th>
+      </tr>
+      <tr ng-repeat="listData in trainInfoList">
+        <td class="list1"><a href="#" title="{{listData.TrainingName}}">{{listData.TrainingName}}</a></td>
+        <td class="list1" title="{{listData.GroupName}}">{{listData.GroupName}}</td>
+        <td class="list1" title="{{listData.SkillsQualificationName}}">{{listData.SkillsQualificationName}}</td>
+        <td class="list2">{{listData.ApplyStartTime | dateFilter | date:'yyyy-MM-dd'}}至{{listData.ApplyEndTime | dateFilter | date:'yyyy-MM-dd'}}</td>
+        <td class="list2">{{listData.TrainingStartTime | dateFilter | date:'yyyy-MM-dd'}}至{{listData.TrainingEndTime | dateFilter | date:'yyyy-MM-dd'}}</td>
+        <td class="red list3" ng-click=""style="cursor: pointer"> 详细</td>
+      </tr>
+    </table>
+    <div tm-pagation conf="paginationConf"></div>
+  </div>
+</div>
+<style>
+  .trainInfoHeader > h1{
+    line-height: 49px;
+    padding-left: 49px;
+    font-size: 22px;
+    color: rgb(51,51,51);
+    margin-top: -20px;
+  }
+  .trainInfo table th{
+    text-align: center;
+    font-weight: bold;
+
+  }
+  .trainInfo .form-group input{
+    width: 400px;
+    text-indent: 10px;
+  }
+  .trainInfo .titleBg{
+    background: #edf3fc;
+  }
+  .trainInfo .table th{
+    font-weight: 600;
+  }
+  .trainInfo .table th,.trainInfo .table td{
+    text-align: center;
+  }
+  .trainInfo .table th.list1{
+    width: 90px;
+  }
+  .trainInfo .table td{
+    padding-left:0;
+    padding-right: 0;
+  }
+  .trainInfo .table td.list1{
+    width: 95px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+  }
+  .trainInfo .table th.list2{
+    width: 180px;
+  }
+  .trainInfo .table td.list2{
+    width: 180px;
+  }
+  .trainInfo .table td.list3,.trainInfo .table th.list3{
+    width: 50px;
+  }
+
+</style>

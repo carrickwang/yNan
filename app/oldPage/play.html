@@ -706,7 +706,7 @@
                             <div class="overhide" style="font-size: 14px;color: #323232;line-height: 28px;
         font-weight: normal;" title="{{resultCourseDetail.Name}}">{{resultCourseDetail.Name}}</div>
                             <div style="float:left">教师：{{resultCourseDetail.Teacher}}</div>
-                            <div style="float:right">时长：{{resultCourseDetail.Duration}}</div>
+                            <!--<div style="float:right;display: none;">时长：{{resultCourseDetail.Duration}}</div>-->
                             <div style="clear:both">
                                 <span>
                                     <a href="#"></a>
@@ -716,35 +716,35 @@
                         <span class="star">{{resultCourseDetail.StudentGrade}}</span>
                         <div id="BrowseScore" data-pro="{{resultCourseDetail.BrowseScore}}"><b>课程进度：</b><span class="jd_box"><span class="jd_bg" tmpt-css="width:{{resultCourseDetail.BrowseScore}}%">&nbsp;</span></span>&nbsp;<span class="score">{{resultCourseDetail.BrowseScore}}%</span></div>
                         <hr style="margin-top:3px;" />
-                        <div style="color:#656565;margin-top:4px; font-size: 12px; word-spacing: 4px; text-align: justify;">课程描述：{{resultCourseDetail.Description}}</div>
+                        <div style="color:#000;margin-top:4px; font-size: 16px; word-spacing: 4px; text-align: justify;">学员评分<!--{{resultCourseDetail.Description}}--></div>
                     </div>
-                    <div class="tools">
-                        <ul>
-                            <li class="slide-nav">
-                                <a href="javascript:void(0);"><i class="icon iconfont">&#xe601;</i> 笔记</a>
-                            </li>
-                            <li class="slide-nav">
-                                <a href="javascript:void(0);"><i class="icon iconfont">&#xe603;</i> 评论</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <!--<div class="tools">-->
+                        <!--<ul>-->
+                            <!--<li class="slide-nav">-->
+                                <!--<a href="javascript:void(0);"><i class="icon iconfont">&#xe601;</i> 笔记</a>-->
+                            <!--</li>-->
+                            <!--<li class="slide-nav">-->
+                                <!--<a href="javascript:void(0);"><i class="icon iconfont">&#xe603;</i> 评论</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
                     <div style="overflow: auto;height:400px;">
-                        <div class="slide-content">
-                            <form class="newNote forgerytoken" id="noteFrom" name="noteFrom" action="" method="post">
-                                <div class="textarea-wrap">
-                                    <input name="Name" placeholder="标题" value="">
-                                </div>
-                                <div class="textarea-wrap">
-                                    <textarea data-maxlength="1000" id="js-note-textarea" name="Content" placeholder="请输入笔记内容..."></textarea>
-                                </div>
-                                <input type="button" name="" class='course-btn' value="保存" onclick="addNote({{CourseId}});" style="float:right;margin-top:10px;margin-right:8px;margin-bottom:10px;">
-                                <input id="txtCourseId" value="{{CourseId}}" name="CourseId" type="hidden" />
-                            </form>
-                            <div id="{{Id}}" class="notes forgerytoken" tmpt-each="resultCourseNote">
-                                <div class="title" style="line-height: 1.2;margin-bottom: 10px;">标题:{{Name}}<span class="time" style="color:#999;font-size: 12px;float: right" tmpt-function="ParseTime([[CreateDate]],'yyyy-MM-dd')"></span></div>
-                                <div class="content">{{Content}}<span class="delnote" onclick="delNote({{Id}})">删除</span></div>
-                            </div>
-                        </div>
+                        <!--<div class="slide-content">-->
+                            <!--<form class="newNote forgerytoken" id="noteFrom" name="noteFrom" action="" method="post">-->
+                                <!--<div class="textarea-wrap">-->
+                                    <!--<input name="Name" placeholder="标题" value="">-->
+                                <!--</div>-->
+                                <!--<div class="textarea-wrap">-->
+                                    <!--<textarea data-maxlength="1000" id="js-note-textarea" name="Content" placeholder="请输入笔记内容..."></textarea>-->
+                                <!--</div>-->
+                                <!--<input type="button" name="" class='course-btn' value="保存" onclick="addNote({{CourseId}});" style="float:right;margin-top:10px;margin-right:8px;margin-bottom:10px;">-->
+                                <!--<input id="txtCourseId" value="{{CourseId}}" name="CourseId" type="hidden" />-->
+                            <!--</form>-->
+                            <!--<div id="{{Id}}" class="notes forgerytoken" tmpt-each="resultCourseNote">-->
+                                <!--<div class="title" style="line-height: 1.2;margin-bottom: 10px;">标题:{{Name}}<span class="time" style="color:#999;font-size: 12px;float: right" tmpt-function="ParseTime([[CreateDate]],'yyyy-MM-dd')"></span></div>-->
+                                <!--<div class="content">{{Content}}<span class="delnote" onclick="delNote({{Id}})">删除</span></div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="slide-content">
                             <div class="newComment">
                                 <div class="wrapper">
@@ -754,9 +754,9 @@
                                     <div id="star_word">一般</div>
                                 </div>
                                 <div class="clear"></div>
-                                <div class="textarea-wrap">
-                                    <textarea data-maxlength="1000" class="textbox" id="txtCourseComment" name="" placeholder="请输入评论内容(字数不能低于100)..."></textarea>
-                                </div>
+                                <!--<div class="textarea-wrap">-->
+                                    <!--<textarea data-maxlength="1000" class="textbox" id="txtCourseComment" name="" placeholder="请输入评论内容(字数不能低于20)..."></textarea>-->
+                                <!--</div>-->
                                 <input id="txtCourseId" value="{{CourseId}}" name="CourseId" type="hidden" />
                                 <input type="button" name="" class='course-btn' value="保存" id="btnCourseComment" style="float:right;margin-top:10px;margin-right:8px;margin-bottom:10px;">
                             </div>

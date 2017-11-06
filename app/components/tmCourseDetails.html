@@ -26,7 +26,7 @@
                 <div class="preventorgery"></div>
               </td>
               <td class="listtb3">
-                <span>学员评分：</span>
+                <span>综合评分：</span>
               </td>
               <td class="listtb4">
                 <span class="star" style="background-position-x: -{{courseDetailsData.CourseModel.StudentGrade*121}}px;"></span><span style="color:#EA4646 !important">{{courseDetailsData.CourseModel.StudentGrade}}</span>
@@ -40,36 +40,29 @@
                 <a href="#/courseCenter/{{courseDetailsData.CourseModel.ChannelId}}">{{courseDetailsData.CourseModel.ChannelName}}</a>
               </td>
               <td class="listtb3">
-                <span>评论：</span>
-              </td>
-              <td class="listtb4"><span>已有<span style="color:#EA4646 !important">{{courseDetailsData.Count}}</span>条评论</span></td>
-            </tr>
-            <tr>
-              <td class="listtb1">
                 <span>课程教师：</span>
               </td>
-              <td class="listtb2">
+              <td class="listtb4">
                 <span>{{courseDetailsData.CourseModel.Teacher}}</span>
               </td>
-              <td class="listtb3">
-                <span>课程学时：</span>
-              </td>
-              <td class="listtb4"><span style="color:#EA4646 !important">{{courseDetailsData.CourseModel.Credit}}</span></td>
             </tr>
             <tr>
               <td class="listtb1">
                 <span style="display: none;">时长：</span>
+                <span>参加测试：</span>
               </td>
               <td class="listtb2">
                 <span style="color:#EA4646 !important;display: none;">{{courseDetailsData.CourseModel.Duration}}</span>
-              </td>
-              <td class="listtb3">
-                <span>参加测试：</span>
-              </td>
-              <td class="listtb4">
                 <a ng-if="courseDetailsData.CourseModel.ExamId!=0"  ng-click="havTest(courseDetailsData.CourseModel.ExamId)" class="red">参加测试</a>
                 <span ng-if="courseDetailsData.CourseModel.ExamId==0" class="black" ng-if="courseDetailsData.CourseModel.ExamId">无</span>
               </td>
+              <td class="listtb3">
+                <span>课程类型：</span>
+              </td>
+              <td class="listtb4">
+                <span>{{}}</span>
+              </td>
+
             </tr>
             <tr>
               <td class="listtb1">
@@ -83,9 +76,11 @@
               <td class="listtb3">
                 <span>播放：</span>
               </td>
-              <td class="listtb4" >
-                <a ng-if="courseDetailsData.CourseModel.BrowseScore>=0" href="#/play/play/{{courseDetailsData.CourseModel.Id}}" target="_blank" class="red">播放</a>
-                <a ng-if="courseDetailsData.CourseModel.BrowseScore < 0" target="_blank" ng-click="selectClass(courseDetailsData.CourseModel.Id);" class="red favoritedel">选课并播放</a>
+              <td class="listtb4">
+                <a ng-if="courseDetailsData.CourseModel.BrowseScore>=0 && courseDetailsData.Role!==7" href="#/play/play/{{courseDetailsData.CourseModel.Id}}" target="_blank" class="red">播放</a>
+                <a ng-if="courseDetailsData.CourseModel.BrowseScore < 0" target="_blank" ng-click="selectClass(courseDetailsData.CourseModel.Id);" class="red favoritedel">播放</a>
+                <a class="red" ng-if="courseDetailsData.CourseModel.BrowseScore>=0 && courseDetailsData.Role==7" ng-click="playType(courseDetailsData.CourseModel.Id,0)">继续学习</a>
+                <a class="mar_left_30 red" ng-if="courseDetailsData.CourseModel.BrowseScore>=0 && courseDetailsData.Role==7" ng-click="playType(courseDetailsData.CourseModel.Id,1)">重新学习</a>
               </td>
             </tr>
             <tr>
@@ -125,7 +120,7 @@
 
 <style>
   .cur_detail .jindu {
-    width: 100px;
+    width: 200px;
     border: 1px solid #7abc1d;
     overflow: hidden;
     float: left;

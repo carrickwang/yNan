@@ -3,8 +3,8 @@
   <div class="breadCrumb mar_top_10">
     <img src="images/link.gif" alt="">
     <strong>您当前的位置&nbsp;:&nbsp;</strong>
-    <a href="#/main">首页&nbsp;>&nbsp;</a>
-    <span>{{Data.ViewBag.TitleNav}}</span>
+    <a href="#/main">首页</a>
+    <span>&nbsp;>&nbsp;{{Data.ViewBag.TitleNav}}</span>
   </div>
   <div class="statisticsTitle">
     <span>{{Data.ViewBag.TitleNav}}</span>
@@ -12,29 +12,14 @@
   <div dw-loading="personalArchive">
     <div class="statisticsBox">
       <div class="statisticsBoxInner">
-        <p>
-          尊敬的&nbsp<span class="font-red">{{Data.Model.Name}}</span>&nbsp学员，截止至今，
-          您总选修&nbsp;<span class="font-red">{{Data.Model.ElectiveCount}}</span>&nbsp;门课程，
-          已学完&nbsp;<span class="font-red">{{Data.Model.FinishCount}}</span>&nbsp;门，
-          <span class="font-red">{{Data.Model.UnFinishCount}}</span>&nbsp;门未学完，
-          累计参加&nbsp;<span class="font-red">{{Data.Model.TestCount}}</span>&nbsp;次测试，
-          修满&nbsp;<span class="font-red">{{Data.Model.SumCredit}}</span>&nbsp;学时，
-          您的学时在全系统排名&nbsp;<span class="font-red">{{Data.Model.Rank}}</span> ，祝您学有所成！
-        </p>
-        <p>
-          固网获得学时：<span class="font-red">{{Data.Model.PcCredit}}</span>，
-          移动获得学时：<span class="font-red">{{Data.Model.MobileCredit}}</span>，
-          指定获得学时：<span class="font-red">{{Data.Model.AppointCredit}}</span>，
-          文章获得学时：<span class="font-red">{{Data.Model.ArticleCredit}}</span>，
-          考试获得学时：<span class="font-red">{{Data.Model.ExamCredit}}</span>，
-          评论获得学时：<span class="font-red">{{Data.Model.CommentCredit}}</span>，
-          培训获得学时：<span class="font-red">{{Data.Model.TrainingCredit}}</span>,
-          规定指定学时：<span class="font-red">{{Data.Model.RegulationsAppointCredit}}</span>，
-          <br />
-          规定文章学时：<span class="font-red">{{Data.Model.RegulationsArticleCredit}}</span>，
-          规定考试学时：<span class="font-red">{{Data.Model.RegulationsExamCredit}}</span>，
-          规定总学时：<span class="font-red">{{Data.Model.RegulationsSumCredit}}</span>
-        </p>
+        <!--<p>-->
+          <!--尊敬的&nbsp<span class="font-red">{{Data.Model.Name}}</span>&nbsp学员，一年内截止至今，-->
+          <!--您总选学了&nbsp;<span class="font-red">{{Data.ViewBag.StudyCount}}</span>&nbsp;个技能培训课程，-->
+          <!--其中已学完职业技能资格课程&nbsp;<span class="font-red">{{Data.ViewBag.StudyFinishCount}}</span>&nbsp;门，-->
+          <!--<span class="font-red">{{Data.ViewBag.StudyUnFinishCount}}</span>&nbsp;门未学完。已学完非取证培训课程 <span class="font-red">{{Data.ViewBag.StudyFinishguidance}}</span> 门，<span class="font-red">{{Data.ViewBag.StudyUnFinishguidance}}</span> 门未学完；-->
+          <!--参加&nbsp;<span class="font-red">{{Data.ViewBag.JoinExamCount}}</span>&nbsp;门职业技能资格考试，成绩合格<span class="font-red">{{Data.ViewBag.ExamConformityCount}}</span>门，-->
+          <!--您的所学学时在全系统排名&nbsp;<span class="font-red">{{Data.Model.Rank}}</span> ，祝您学有所成！-->
+        <!--</p>-->
         <br />
         <fieldset style="visibility: visible;">
           <legend class="legend_60"><strong>基本信息</strong></legend><br />
@@ -52,10 +37,10 @@
                 {{Data.Model.Name}}
               </td>
               <td width="25%" align="center" class="table1">
-                单位
+                身份证
               </td>
               <td align="center">
-                {{Data.Model.Department}}
+                {{Data.Model.IdCard}}
               </td>
             </tr>
           </table>
@@ -67,59 +52,63 @@
     <div class="statisticsBox">
       <div class="statisticsBoxInner">
         <fieldset>
-          <legend class="legend_120"><strong>学习课程获得学时</strong></legend>
+          <legend class="legend_140"><strong>取证技能培训学习过程</strong></legend>
           <br />
           <table style="width:96%;margin:0 auto" border="0" align="center" cellpadding="0" cellspacing="0">
             <thead>
             <tr class="table1">
-              <th align="center">选择课程数</th>
-              <th align="center">完成课程数</th>
-              <th align="center">获得总学时</th>
-              <th align="center">内容</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-show="Data.ViewBag.StudyCount">
-              <td align="center">{{Data.ViewBag.StudyCount}}</td>
-              <td>{{Data.ViewBag.StudyFinishCount}}</td>
-              <td>{{Data.ViewBag.StudyCreditSum}}</td>
-              <td><a class="courseDetails" ng-click="Show_table('one')">详细</a></td>
-            </tr>
-            <tr ng-show="!Data.ViewBag.StudyCount">
-              <td colspan="4">暂无数据</td>
-            </tr>
-            </tbody>
-          </table>
-          <br />
-          <table ng-show="table_show_one" border="0" align="center" cellpadding="0" cellspacing="0" style="width: 96%; margin:0 auto">
-            <thead>
-            <tr class="table1">
+              <th align="center">职业技能资格</th>
               <th align="center">课程名称</th>
-              <th align="center">开始时间</th>
-              <th align="center">完成时间</th>
-              <th align="center">学习状态</th>
+              <th align="center">培训机构</th>
+              <th align="center">培训时间</th>
               <th align="center">学习进度</th>
-              <th align="center">获得学时</th>
+              <th align="center" style="width: 20%;">已学学时</th>
               <th align="center">来源</th>
-              <th align="center">评论学时</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="StudyCourse in Data.Model.StudyCourseModel">
-              <td width="40%" align="center">{{StudyCourse.CourseName}}</td>
-              <td>{{StudyCourse.StartDate | dateFilter | date:'yyyy-MM-dd'}}</td>
-              <td>{{StudyCourse.FinishDate | dateFilter | date:'yyyy-MM-dd'}}</td>
-              <td>{{StudyCourse.Status}}</td>
+              <td>{{StudyCourse.GroupName}}</td>
+              <td align="center">{{StudyCourse.CourseName}}</td>
+              <td>{{StudyCourse.GroupName}}</td>
+              <td>{{StudyCourse.StartDate | dateFilter | date:'yyyy-MM-dd'}}-{{StudyCourse.FinishDate | dateFilter | date:'yyyy-MM-dd'}}</td>
               <td>{{StudyCourse.BrowseScore}}%</td>
               <td>{{StudyCourse.Credit}}</td>
               <td>{{StudyCourse.CreditSource}}</td>
-              <td>{{StudyCourse.CommentCredit}}</td>
             </tr>
-            <tr>
-              <td colspan="9"><div class="mar_0_auto" tm-pagation conf="paginationConf[0]"></div></td>
-            </tr>
+            <td colspan="7"><div class="mar_0_auto" tm-pagation conf="paginationConf[0]"></div></td>
             </tbody>
           </table>
+          <br />
+          <!--<table ng-show="table_show_one" border="0" align="center" cellpadding="0" cellspacing="0" style="width: 96%; margin:0 auto;display: none;">-->
+            <!--<thead>-->
+            <!--<tr class="table1">-->
+              <!--<th align="center">知识点名称</th>-->
+              <!--&lt;!&ndash;<th align="center">开始时间</th>&ndash;&gt;-->
+              <!--<th align="center">完成时间</th>-->
+              <!--<th align="center">学习状态</th>-->
+              <!--<th align="center">学习进度</th>-->
+              <!--&lt;!&ndash;<th align="center">获得学分</th>&ndash;&gt;-->
+              <!--<th align="center">来源</th>-->
+              <!--&lt;!&ndash;<th align="center">评论学分</th>&ndash;&gt;-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr ng-repeat="StudyCourse in Data.Model.StudyCourseModel">-->
+              <!--<td width="40%" align="center">{{StudyCourse.CourseName}}</td>-->
+              <!--&lt;!&ndash;<td>{{StudyCourse.StartDate | dateFilter | date:'yyyy-MM-dd'}}</td>&ndash;&gt;-->
+              <!--<td>{{StudyCourse.FinishDate | dateFilter | date:'yyyy-MM-dd'}}</td>-->
+              <!--<td>{{StudyCourse.Status}}</td>-->
+              <!--<td>{{StudyCourse.BrowseScore}}%</td>-->
+              <!--&lt;!&ndash;<td>{{StudyCourse.Credit}}</td>&ndash;&gt;-->
+              <!--<td>{{StudyCourse.CreditSource}}</td>-->
+              <!--&lt;!&ndash;<td>{{StudyCourse.CommentCredit}}</td>&ndash;&gt;-->
+            <!--</tr>-->
+            <!--<tr>-->
+              <!--<td colspan="9"><div class="mar_0_auto" tm-pagation conf="paginationConf[0]"></div></td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+          <!--</table>-->
 
         </fieldset>
       </div>
@@ -127,113 +116,70 @@
     <div class="statisticsBox">
       <div class="statisticsBoxInner">
         <fieldset>
-          <legend class="legend_120"><strong>参加测试获得学时</strong></legend>
+          <legend class="legend_130"><strong>引导性培训学习过程</strong></legend>
           <br />
-          <table style="width: 96%;margin:0 auto" border="0" align="center" cellpadding="0" cellspacing="0">
+          <table border="0" align="center" cellpadding="0" cellspacing="0" style="width: 96%; margin:0 auto">
             <thead>
             <tr class="table1">
-              <th align="center">总成绩分</th>
-              <th align="center">平均成绩分</th>
-              <th align="center">总学时</th>
-              <th align="center">平均学时</th>
-              <th align="center">内容</th>
+              <th align="center">引导性培训课程名称</th>
+              <!--<th align="center">开始时间</th>-->
+              <th align="center">完成时间</th>
+              <th align="center">学习状态</th>
+              <th align="center">学习进度</th>
+              <th align="center">已学学时</th>
+              <th align="center">来源</th>
+              <!--<th align="center">评论学分</th>-->
             </tr>
             </thead>
             <tbody>
-            <tr ng-show="Data.ViewBag.ExamFinishCount">
-              <td align="center">{{Data.ViewBag.ExamScoreSum}}</td>
-              <td>{{Data.ViewBag.ExamScoreAvg}}</td>
-              <td>{{Data.ViewBag.ExamCreditSum}}</td>
-              <td>{{Data.ViewBag.ExamCreditAvg}}</td>
-              <td><a class="courseDetails" ng-click="Show_table('two')">详细</a></td>
+            <tr ng-repeat="GuidanceCourse in Data.Model.studyGuidanceCourseModel">
+              <td width="40%" align="center">{{GuidanceCourse.CourseName}}</td>
+              <!--<td>{{StudyCourse.StartDate | dateFilter | date:'yyyy-MM-dd'}}</td>-->
+              <td>{{GuidanceCourse.FinishDate | dateFilter | date:'yyyy-MM-dd'}}</td>
+              <td>{{GuidanceCourse.Status}}</td>
+              <td>{{GuidanceCourse.BrowseScore}}%</td>
+              <td>{{}}</td>
+              <td>{{StudyCourse.CreditSource}}</td>
+              <!--<td>{{StudyCourse.CommentCredit}}</td>-->
             </tr>
             <tr>
-              <td ng-show="!Data.ViewBag.ExamFinishCount" colspan="5">暂无数据</td>
+              <td colspan="6"><div class="mar_0_auto" tm-pagation conf="paginationConf[1]"></div></td>
             </tr>
             </tbody>
           </table>
-          <br />
-          <table ng-show="table_show_two" border="0" align="center" cellpadding="0" cellspacing="0" style="width: 96%; margin:0 auto">
-            <thead>
-            <tr class="table1">
-              <th align="center">序号</th>
-              <th align="center">测试名称</th>
-              <th align="center">测试成绩</th>
-              <th align="center">获得学时</th>
-              <th align="center">成绩打印</th>
-            </tr>
-            </thead>
-            <tbody >
-            <tr ng-repeat="CourseTest in Data.Model.ExamCreditModel">
-              <td align="center">{{$index+1}}</td>
-              <td width="40%">{{CourseTest.ExamName}}</td>
-              <td>{{CourseTest.ExamSorce}}</td>
-              <td>{{CourseTest.Credit}}</td>
-              <td ng-click="getExamGrade({ExamID:CourseTest.ExamID})">打印</td>
-            </tr>
-            <tr>
-              <td colspan="9" ><div class="mar_0_auto" tm-pagation conf="paginationConf[1]"></div></td>
-            </tr>
-            </tbody>
-          </table>
+          <br>
         </fieldset>
-
       </div>
     </div>
     <div class="statisticsBox">
       <div class="statisticsBoxInner">
         <fieldset>
-          <legend class="legend_90"><strong>培训获得学时</strong></legend>
+          <legend class="legend_140"><strong>取证技能培训学习成果</strong></legend>
           <br />
           <table style="width: 96%;margin:0 auto" border="0" align="center" cellpadding="0" cellspacing="0">
             <thead>
             <tr class="table1">
-              <th align="center">选学培训项目数</th>
-              <th align="center">完成培训项目数</th>
-              <th align="center">获得总学时</th>
-              <th align="center">内容</th>
+              <th align="center">职业技能资格</th>
+              <th align="center">培训机构</th>
+              <th align="center">考试时间</th>
+              <th align="center">考试得分</th>
+              <th align="center">考试结果</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-show="Data.ViewBag.TrainingCount">
-              <td align="center">{{Data.ViewBag.TrainingCount}}</td>
-              <td>{{Data.ViewBag.TrainingFinishCount}}</td>
-              <td>{{Data.Model.TrainingCredit}}</td>
-              <td><a ng-click="Show_table('three')" class="courseDetails">详细</a></td>
+            <tr ng-repeat="ExamVModel in Data.Model.TrainUserExamVModel">
+              <td align="center">{{ExamVModel.CourseExamName}}</td>
+              <td>{{ExamVModel.TrainName}}</td>
+              <td>{{ExamVModel.ExamTime | formatString}}至{{ExamVModel.ExamTime | formatString1}}</td>
+              <td>{{ExamVModel.Score}}</td>
+              <td>{{ExamVModel.ExamResult}}</td>
             </tr>
-            <tr ng-show="!Data.ViewBag.TrainingCount">
-              <td colspan="4">暂无数据</td>
+            <tr>
+              <td colspan="9" ><div class="mar_0_auto" tm-pagation conf="paginationConf[2]"></div></td>
             </tr>
             </tbody>
           </table>
           <br />
-          <table ng-show="table_show_three" border="0" align="center" cellpadding="0" cellspacing="0" style="width: 96%; margin:0 auto">
-            <thead>
-            <tr class="table1">
-              <th align="center">姓名</th>
-              <th align="center">培训项目名称</th>
-              <th align="center">培训类别</th>
-              <th align="center">开始时间</th>
-              <th align="center">结束时间</th>
-              <th align="center">培训项目分</th>
-              <th align="center">获得学时</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="TrainCourse in Data.Model.TrainCreditModel">
-              <td align="center">{{TrainCourse.UserName}}</td>
-              <td width="40%">{{TrainCourse.TrainName}}</td>
-              <td>{{TrainCourse.TrainType}}</td>
-              <td>{{TrainCourse.StartDate | dateFilter | date:'yyyy-MM-dd'}}</td>
-              <td>{{TrainCourse.EndDate | dateFilter | date:'yyyy-MM-dd'}}</td>
-              <td>{{TrainCourse.Score}}</td>
-              <td>{{TrainCourse.Credit}}</td>
-            </tr>
-            <tr>
-              <td colspan="9"><div class="mar_0_auto" tm-pagation conf="paginationConf[2]"></div></td>
-            </tr>
-            </tbody>
-          </table>
         </fieldset>
 
       </div>
@@ -297,8 +243,11 @@
   .legend_90{
     width: 90px;
   }
-  .legend_120{
-    width: 120px;
+  .legend_130{
+    width: 130px;
+  }
+  .legend_140{
+    width: 140px;
   }
   .mar_0_auto{
     margin: 0 auto;
@@ -322,7 +271,7 @@
   .statisticsBox td,.statisticsBox th{
     border: 1px solid #ccc;
     height: 30px;
-    line-height: 30px;
+    /*line-height: 30px;*/
     text-align: center;
   }
 </style>

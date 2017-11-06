@@ -1,0 +1,43 @@
+<!--个人学习档案-->
+<div class="container_24 mar_top_20 personalArchives">
+  <div class="breadCrumb mar_top_10">
+    <img src="images/link.gif" alt="">
+    <strong>您当前的位置&nbsp;:&nbsp;</strong>
+    <a href="#/main">首页</a>
+    <span>&nbsp;>&nbsp;培训计划</span>
+  </div>
+  <div class="train_plan">
+    <table class="table" align="center">
+      <tr>
+        <th>培训计划</th>
+        <th>培训机构</th>
+        <th>职业技能资格</th>
+        <th>培训时间</th>
+        <th>培训地点</th>
+        <th>考试时间</th>
+        <th>内容</th>
+      </tr>
+      <tr ng-repeat="planList in planList">
+        <td>{{planList.TrainingName}}</td>
+        <td>{{planList.CourseName}}</td>
+        <td>{{planList.SkillsQualificationName}}</td>
+        <td>{{planList.TrainingStartTime | dateFilter | date:'yyyy-MM-dd'}}至{{planList.TrainingEndTime | dateFilter | date:'yyyy-MM-dd'}}</td>
+        <td>{{}}</td>
+        <td>{{}}</td>
+        <td>详情</td>
+      </tr>
+      <tr>
+        <td colspan="7" class="text-center" ng-hide="planList.length">暂无数据</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<style>
+.train_plan{
+  margin-top: 20px;
+  min-height: 280px;
+}
+.train_plan th{
+  font-weight: 800;
+}
+</style>

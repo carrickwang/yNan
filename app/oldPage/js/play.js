@@ -214,7 +214,7 @@ $(function () {
     $("#btnCourseComment").click(function () {
         var courseProgress = parseInt($('.jd_bg').css("width"));
         if (courseProgress < parseInt($('.jd_box').css("width"))) {
-            alert("课程为学完不可评论，请学完课程");
+            alert("课程未学完不可评论，请学完课程");
             return false;
         }
 

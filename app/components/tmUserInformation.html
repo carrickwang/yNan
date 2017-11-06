@@ -5,21 +5,26 @@
   <div class="content login_info" dw-loading="loginOut">
     <ul class="loginAfter_ul">
       <li class="welcom">欢迎您:<b class="blue">{{info.Model.Name}}</b>({{info.Model.Account}})</li>
+      <!--<li>-->
+        <!--<span  class="hours">课程学分：<span class="blue">{{info.Model.PcCredit+info.Model.MobileCredit}}</span></span>-->
+        <!--<span>考试学分：<span class="blue">{{info.Model.ExamCredit}}</span></span>-->
+      <!--</li>-->
       <li>
-        <span  class="hours">课程学时：<span class="blue">{{info.Model.PcCredit+info.Model.MobileCredit}}</span></span>
-        <span>考试学时：<span class="blue">{{info.Model.ExamCredit}}</span></span>
-      </li>
-      <li>
-        <span  class="hours">当前学时：<span class="blue">{{info.Model.SumCredit}}</span></span>
-        <span>学时排行：<span class="blue">{{info.Model.Ranking}}</span></span>
-      </li>
-      <li>
+
         <span  class="hours">规定学时：<span class="blue">{{info.Model.BatchTotalCredit}}</span></span>
+        <span>当前学时：<span class="blue">{{info.Model.SumCredit}}</span></span>
+      </li>
+      <li>
+        <span  class="hours">学时排行：<span class="blue">{{info.Model.Ranking}}</span></span>
         <span>考核状态：<span class="blue">{{info.Model.PassStatus?"通过":"未通过"}}</span></span>
       </li>
       <li>
         <span>个人学习档案：</span>
         <span class="list2 grey"><a href="#/personalCenter/personaLearningArchives" target="_blank">详细&gt;&gt;</a></span>
+      </li>
+      <li>
+        <span>培训计划：</span>
+        <span class="list2 grey"><a href="#/personalCenter/trainPlan" target="_blank">详细&gt;&gt;</a></span>
       </li>
       <li>
         <span class="list1">您有<span class="blue">{{info.Model.UnRead}} </span>条新通知！</span>
@@ -28,11 +33,10 @@
       <li class="lastChild fontSize12 grey">
         <a href="#/personalCenter/modifyPassword">修改密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="#/personalCenter/changeUser" id="ctl05_A2">修改信息</a> &nbsp;|&nbsp;
-        <span class="list2" ><a href="/admin/" target="_blank">进入管理控制台</a></span>
+        <span class="list2" ng-if="info.UserType=='管理员'" ><a href="/admin/" target="_blank">进入管理控制台</a></span>
       </li>
       <li class="lastChild lastChild1">
         <a class="exit" href="javascript:;" ng-click="out('out')">退出</a>
-        <!--<span class="list1"><a  href="javascript:void();" onclick="loginOut('cancel')">删除账号</a></span>-->
       </li>
     </ul>
   </div>
@@ -57,7 +61,7 @@
   }
   .UserInformation .loginAfter_ul .hours{
     display: inline-block;
-    width: 110px;
+    width: 146px;
   }
 
   .UserInformation .loginAfter_ul .grey a {

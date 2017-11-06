@@ -4,20 +4,18 @@
   <ul>
     <li><span>姓<span class="slot">名：</span></span><span class="result_c">{{dataList.UserName}}</span></li>
     <li><span>单<span class="slot">位：</span></span><span class="result_c">{{dataList.UserGroup}}</span></li>
-    <li><span>考试时间：</span><span class="result_c">{{dataList.ExamTime}}</span></li>
+    <li><span>考试时间：</span><span class="result_c">{{dataList.ExamTime | dateFilter | date:'yyyy-MM-dd'}}</span></li>
     <li><span>考试成绩：</span><span class="result_c">{{dataList.ExamScore}}</span></li>
     <li><span>考核结果：</span><span class="result_c">通过</span></li>
   </ul>
   <div class="footer">云南省技能在线学习平台</div>
+  <button id="btn" class="btn" onclick="printFn();">打印成绩单</button>
 </div>
 
 <style>
   *{
     padding:0;
     margin:0;
-  }
-  body,html{
-    height: 100%;
   }
   ul,li{
     list-style:none;
@@ -55,4 +53,20 @@
   .scoreResult .result_c{
     margin-left: 20px;
   }
+  .scoreResult .btn{
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto;
+  }
 </style>
+<script>
+  function printFn(){
+    var btn = document.getElementById('btn');
+    btn.style.display = 'none';
+    window.print();
+  }
+</script>

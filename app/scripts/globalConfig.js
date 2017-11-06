@@ -1,7 +1,7 @@
 ﻿"user strict"
 //请求后台数据入口
-var API_URL = "/api";
-//var API_URL = "http://122.225.101.117:81/api";
+//var API_URL = "/api";
+var API_URL = "http://192.168.1.15:8033/api";
 var API_URL_ADMIN = API_URL + "/admin";
 
 
@@ -209,7 +209,7 @@ var ALL_PORT = {
   //课程列表
   CourseList:{
     url:API_URL+"/Page/CourseList",
-    data:{page:'1',rows:'4',sort:'Sort',order:'desc',title:'',courseType:'All',channelId:'',wordLimt:15}
+    data:{page:'1',rows:'4',sort:'CommendatoryFlag',order:'desc',title:'',courseType:'All',channelId:'',wordLimt:15}
   },
   //课程点击排行
   CourseClickRank:{
@@ -233,8 +233,8 @@ var ALL_PORT = {
   },
   //个人中心课程
   MyCenter:{
-    url:API_URL+"/Page/MyCenter",
-    data:{page:1,rows:10,sort:'BrowseScore',order:'desc',titleNav:"个人中心",courseType:"Unfinish",title:""}
+    url:API_URL+"/Page/MyCenterNew",
+    data:{page:1,rows:10,sort:'BrowseScore',order:'desc',titleNav:"个人中心",courseType:"StudyingSkill",title:""}
   },
   //考试中心列表
   ExamList:{
@@ -596,5 +596,30 @@ var ALL_PORT = {
   ExamGrade:{
     url:API_URL+"/Page/ExamGrade",
     data:{}
+  },
+  //课程播放选择（续播或重新播放）
+  PlayType:{
+    url:API_URL +"/Page/PlayType",
+    data:{Times:'',CourseId:''}
+  },
+  //培训计划
+  PageForTrainingPlan:{
+    url:API_URL+'/Page/PageForTrainingPlan',
+    data:{page:1,rows:10}
+  },
+  //培训动态
+  TrainingPlan:{
+    url:API_URL+'/Page/TrainingPlan',
+    data:{page:1,rows:10,trainName:'',trainSkill:'',applyDate:'',trainDate:''}
+  },
+  //考试信息动态
+  ExamListForPage:{
+    url:API_URL+'/Page/ExamListForPage',
+    data:{page:1,rows:10}
+  },
+  //提交乱序题目
+  ExamForAnswer:{
+    url:API_URL+'/Exam/ExamForAnswer',
+    data:{data:[]}
   }
 };

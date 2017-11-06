@@ -62,20 +62,28 @@
                   $scope.studyData = response.Data;
               });
           };
+          //培训动态
+          commonService.getData(ALL_PORT.TrainingPlan.url,'POST',ALL_PORT.TrainingPlan.data).then(function (res) {
+            $scope.trainInfoList = res;
+          });
+          //考试信息动态
+          commonService.getData(ALL_PORT.ExamListForPage.url,'POST',ALL_PORT.ExamListForPage.data).then(function (res) {
+            $scope.examInfoList = res;
+          });
           //政策法规 综合动态 常见问题 考试信息
-          $scope.three_tab = function (options) {
+          /*$scope.three_tab = function (options) {
             commonService.getData(ALL_PORT.ArticleList.url, 'POST',
               $.extend({}, ALL_PORT.ArticleList.data, { page: '1', rows: '6'},options))
               .then(function(response) {
                   $scope.policyData = response.Data;
               });
-          };
+          };*/
           //学习动态
-          $scope.study_work({CategoryId: 781336});
+          $scope.study_work({CategoryId: 25640});
           //工作动态
           //$scope.study_work({CategoryId: 781337});
           //政策法规
-          $scope.three_tab({CategoryId: 25640});
+          //$scope.three_tab({CategoryId: 25640});
           //综合动态
           //$scope.three_tab({CategoryId: 25653});
           //常见问题
@@ -99,7 +107,7 @@
               var slideFn = function(){
                 $('.newsBoxTab .newsPic li').eq(index).show().siblings('.newsBoxTab .newsPic li').hide();
                 index++;
-                if(index > 4){
+                if(index > $('.newsBoxTab .newsPic li').length-1){
                   index = 0;
                 }
               };
@@ -281,21 +289,21 @@
           //培训列表
           //引导性培训
             commonService.getData(ALL_PORT.CourseList.url, 'POST',
-              $.extend({}, ALL_PORT.CourseList.data,{channelId:2}))
+              $.extend({}, ALL_PORT.CourseList.data,{channelId:2,sort:'CommendatoryFlag'}))
               .then(function(response) {
                   $scope.guideCourseData = response.Data;
                   //console.log(response.Data);
               });
           //技能培训
             commonService.getData(ALL_PORT.CourseList.url, 'POST',
-              $.extend({}, ALL_PORT.CourseList.data,{channelId:16}))
+              $.extend({}, ALL_PORT.CourseList.data,{channelId:16,sort:'CommendatoryFlag'}))
               .then(function(response) {
                 $scope.skillCourseData = response.Data;
                 //console.log(response.Data);
               });
           //其他培训
           commonService.getData(ALL_PORT.CourseList.url, 'POST',
-            $.extend({}, ALL_PORT.CourseList.data,{channelId:17}))
+            $.extend({}, ALL_PORT.CourseList.data,{channelId:17,sort:'CommendatoryFlag'}))
             .then(function(response) {
               $scope.otherCourseData = response.Data;
               //console.log(response.Data);

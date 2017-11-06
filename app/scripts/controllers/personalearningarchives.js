@@ -36,14 +36,16 @@ angular.module('luZhouApp')
             }
         };
       //请求成绩单数据
-        $scope.getExamGrade = function (options) {
+        $scope.getExamGrade = function (ExamID) {
           commonService.getData(ALL_PORT.ExamGrade.url, 'POST',
-            $.extend({}, ALL_PORT.ExamGrade.data, options))
+            $.extend({}, ALL_PORT.ExamGrade.data, {ExamID:ExamID}))
             .then(function(response) {
               if((response.Data.ExamScore-0) < 60){
                 alert("考试未通过，无法打印成绩！")
+              }else{
+                window.open("#/examgrade/"+ExamID);
               }
-              window.open("#/examgrade/"+options.ExamID);
+
 
             });
         }
@@ -78,9 +80,9 @@ angular.module('luZhouApp')
                 .then(function(response) {
                     $loading.finish('personalArchive');
                     $scope.Data = response.Data;
-                    $scope.paginationConf[0].totalItems = response.Data.ViewBag.StudyCount;
-                    $scope.paginationConf[1].totalItems = response.Data.ViewBag.ExamFinishCount;
-                    $scope.paginationConf[2].totalItems = response.Data.ViewBag.TrainingCount;
+                    $scope.paginationConf[0].totalItems = response.Data.Model.StudyCourseModel.length;
+                    $scope.paginationConf[1].totalItems = response.Data.Model.studyGuidanceCourseModel.length;
+                    $scope.paginationConf[2].totalItems = response.Data.Model.TrainUserExamVModel.length;
                     if ($scope.n == 0) {
                         $scope.startDate = response.Data.ViewBag.StartDate;
                         $scope.endDate = response.Data.ViewBag.EndDate;

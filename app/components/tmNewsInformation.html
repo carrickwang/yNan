@@ -1,7 +1,7 @@
 <!--新闻资讯-->
 <div class="tmNewsInformation clearfix">
   <div class="main_header_3">
-    <span ng-click="study_work({CategoryId: 781336})" class="news_1 activeTab">学习动态</span>
+    <span ng-click="study_work({CategoryId: 25640})" class="news_1 activeTab">政策法规</span>
     <span ng-click="study_work({CategoryId: 781337})" class="news_2 ">工作动态</span>
     <i><a href="#/articleList/{{studyData.CategoryId}}">更多>></a></i>
   </div>
@@ -10,7 +10,6 @@
       <ul class="newsPic pull-left">
         <li ng-repeat="stuData in studyData.ListData" repeat-finish="picSlide()">
           <a href="#/articleDetail/{{stuData.Id}}" target="_blank"><img ng-src={{studyData.Path}}/{{stuData.Img}} width="232" height="157" err-Src="images/notFound.jpeg"></a>
-
           <span title="{{stuData.Name}}">{{stuData.Name}}</span>
         </li>
       </ul>

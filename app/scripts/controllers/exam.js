@@ -16,32 +16,64 @@ angular.module('luZhouApp')
         $scope.token = commonService.AntiForgeryToken();
         $loading.start('exam');
         var Id = $routeParams.Id;
+        var Type = $routeParams.Type;
+        var flag = (Type == 'mock') ? true :false;
+        var data = [];
+        $scope.sortArray = function (arr) {
+          for(var i=0;i<arr.length;i++){
+            arr[i].QuestionsItems.sort(function(){return 0.5 - Math.random()});
+          }
+          return arr;
+        };
+        var matchStyle = function (index) {
+          return index==0?'A':(index==1?'B':(index==2?'C':'D'));
+        };
         // console.log(Id,$scope.token);
-        var params = $.extend({}, ALL_PORT.Exam.data, { parameter1: Id })
+        var params = $.extend({}, ALL_PORT.Exam.data, { parameter1: Id,IsTest:flag });
         commonService.getData(ALL_PORT.Exam.url, 'POST', params)
             .then(function(response) {
                 $loading.finish('exam');
-                if (response.Data.Exam.TimeLimit != 0) {
-                    $scope.seconds = parseInt(response.Data.Exam.TimeLimit) * 60 * 1000;
+                if (response.Data.ExamEndTime != null) {
+                    $scope.endTime = parseInt(response.Data.ExamEndTime.replace(/[^0-9-]/ig, ""));
                 }
                 // $scope.seconds = 5*1000;
                 //考试题目数量
                 $scope.examData = response.Data;
                 $scope.checkingQuestions = response.Data.Type0Questions;
+                $scope.sortQuestions1 = $scope.sortArray($scope.checkingQuestions);//乱序的判断题
+
                 $scope.singleQuestions = response.Data.Type1Questions;
+                $scope.sortQuestions2 = $scope.sortArray($scope.singleQuestions);//乱序的单选题
+
                 $scope.multipleQuestions = response.Data.Type2Questions;
+                $scope.sortQuestions3 = $scope.sortArray($scope.multipleQuestions);//乱序的多选题
                 $scope.gapFilling = response.Data.Type3Questions;
                 $scope.examAllScore1 = commonService.examAllScore;
 
+                $.each($scope.sortQuestions1,function (index1,value1) {
+                  $.each(value1.QuestionsItems,function (index11,value11) {
+                    data.push([value1.Id,matchStyle(index11),value11.ItemFlag])
+                  })
+                });
+                $.each($scope.sortQuestions2,function (index2,value2) {
+                  $.each(value2.QuestionsItems,function (index22,value22) {
+                    data.push([value2.Id,matchStyle(index22),value22.ItemFlag])
+                  })
+                });
+                $.each($scope.sortQuestions3,function (index3,value3) {
+                  $.each(value3.QuestionsItems,function (index33,value33) {
+                    data.push([value3.Id,matchStyle(index33),value33.ItemFlag])
+                  })
+                });
+            }).then(function () {
+              commonService.getData(ALL_PORT.ExamForAnswer.url, 'POST', {data:data}).then(function (res) {
 
-                /*$scope.examAllScore0 = commonService.examAllScore (response.Data.Type0Questions);
-                $scope.examAllScore1 = commonService.examAllScore (response.Data.Type1Questions);
-                $scope.examAllScore2 = commonService.examAllScore (response.Data.Type2Questions);
-                $scope.examAllScore3 = commonService.examAllScore (response.Data.Type3Questions);*/
+              })
             });
         //倒计时
         $interval(function() {
-            $scope.seconds -= 1000;
+            $scope.newDate = new Date().getTime();
+            $scope.seconds = $scope.endTime - $scope.newDate;
             if ($scope.seconds == 0) {
                 alert('考试时间到,系统将自动提交！');
                 $scope.submitForm();
@@ -79,7 +111,8 @@ angular.module('luZhouApp')
             // console.log($("#editForm").serialize());
 
             if (((str0 + str1 + str2) === "" || ((str0 + str1 + str2) !== "" && confirm(str0 + str1 + str2 + "未答,是否提交?")))) {
-                var params = $("#editForm").serialize();
+                var params = $("#editForm").serialize()+'&IsTest='+flag;
+                console.log(params);
                 $http({
                     method: 'POST',
                     url: ALL_PORT.PostExam.url,
@@ -90,7 +123,7 @@ angular.module('luZhouApp')
                 }).success(function(response) {
                     if (response.Type == 1) {
                         alert(response.Message);
-                        $location.path('/exam/examReview/' + Id + '/' + response.Value);
+                        $location.path('/exam/examReview/'+Type+'/' + Id + '/' + response.Value);
                     } else {
                         alert(response.Message)
                     }
@@ -101,8 +134,6 @@ angular.module('luZhouApp')
 
             }
         };
-
-
         /*var Id =$routeParams.Id;
         $scope.iframSrc = "../../oldPage/Exam.html?id="+Id;*/
     });

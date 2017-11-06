@@ -7,13 +7,13 @@
   <div class="title text-center">
     <span class="rank1">排名</span>
     <span class="rank2">机构名称</span>
-    <span class="rank3">平均学分</span>
+    <span class="rank3">考核通过率</span>
   </div>
   <ul class="rankingList text-center"  id="rankingList" dw-loading="rankingList">
     <li ng-repeat="rankingData in govermentRanking.ListData" repeat-finish="changeBg()">
       <span class="list1"><span class="list1_bg xxxx">{{$index+1}}</span></span>
       <span class="list2" title="{{rankingData.DepartmentName}}">{{rankingData.DepartmentName}}</span>
-      <span class="list3">{{rankingData.Average}}</span>
+      <span class="list3">{{rankingData.PassRateAvg}}</span>
     </li>
   </ul>
 </div>
@@ -68,7 +68,7 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    text-align: left;
+    text-align: ;
   }
   .govermentRanking .rankingList .list1,.govermentRanking .rankingList .list2,.govermentRanking .rankingList .list3{
     vertical-align: middle;
@@ -78,8 +78,8 @@
     width: 72px;
   }
   .govermentRanking .rankingList > li{
-    height: 25px;
-    line-height:25px;
+    height: 22.5px;
+    line-height:22.5px;
   }
   .red{
     background: #f00;

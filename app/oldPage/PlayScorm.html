@@ -17,7 +17,7 @@
 </head>
 <body>
     <div id="thisPage">
-        <iframe width="100%" height="800" src="{{Url}}" class="iframe_play"></iframe>
+        <iframe id="ifscorm" width="100%" height="800" class="iframe_play"></iframe>
         <input id="portalId" type="hidden" value="{{PortalId}}" />
         <input id="userId" type="hidden" value="{{UserId}}" />
         <input id="courseId" type="hidden" value="{{CourseId}}" />
@@ -25,13 +25,15 @@
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/frontTpl.js"></script>
     <script>
-        Tmpt("thisPage", "Home", "PlayScorm", "courseId={GetQueryString(\"courseId\")}",false);
+        Tmpt("thisPage", "Home", "PlayScorm", "courseId={GetQueryString(\"courseId\")}").complete(function(){
+            $dom.loadJs(['js/playScorm.js']);
+           var data= $dom.getData("thisPage");
+          var $iframeTag =$("#ifscorm"); //document.getElementsByTagName("iframe")[0];
+          $iframeTag.prop("src",data.Url);
+          // iframeTag.setAttribute("src", "/lession/2011-LE-1586/index.htm");  data.Url
+        });
     </script>
-    <script src="js/playScorm.js"></script>
-    <script>
-        var iframeTag = document.getElementsByTagName("iframe")[0];
-       // iframeTag.setAttribute("src", "/lession/2011-LE-1586/index.htm");
-    </script>
+    <!--<script src="js/playScorm.js"></script>-->
 
 </body>
 </html>

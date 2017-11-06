@@ -47,12 +47,17 @@
     <ul class="loginAfter_ul">
       <li class="welcom">欢迎您:<b class="blue">{{userMessage.Name}}</b>({{userMessage.Account}})</li>
       <li>
-        <span>年度学时：<span class="blue">{{userMessage.BatchTotalCredit}}</span></span>
-        <span>当前学时：<span class="blue">{{userMessage.SumCredit}}</span></span>
+        <span>规定学时:<span class="blue">{{userMessage.BatchTotalCredit}}</span></span>
+        <span>当前学时:<span class="blue">{{userMessage.SumCredit}}</span></span>
+        <span>学时排名:<span class="blue">{{userMessage.Ranking}}</span></span>
       </li>
       <li>
-        <span>学时排名：<span class="blue">{{userMessage.Ranking}}</span></span>
+        <span>考核状态:<span class="blue">{{userMessage.Result}}</span></span>
         <span class="list2 grey"><a href="#/personalCenter/personaLearningArchives" target="_blank">查看学习档案&gt;</a></span>
+      </li>
+      <li>
+        <span class="list1">培训计划</span>
+        <span class="list2 grey"><a href="#/personalCenter/trainPlan">查看详情&gt;</a></span>
       </li>
       <li>
         <span class="list1">您有<span class="blue">{{userMessage.UnRead}} </span>条新通知！</span>
@@ -61,13 +66,11 @@
       <li class="lastChild fontSize12 grey">
         <a href="#/personalCenter/modifyPassword">修改密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="#/personalCenter/changeUser" id="ctl05_A2">修改信息</a> &nbsp;|&nbsp;
-        <!--<span class="list2" tmpt-show="{{equal(UserType,'管理员')}}"><a href="/admin" target="_blank">进入管理控制台</a></span>-->
-
-        <span class="list2" ng-if="userAllMessage.UserType=='管理员'" ><a href="/admin" target="_blank">进入管理控制台</a></span>
+        <span class="list2" ng-if="userAllMessage.UserType=='管理员'"><a href="/admin" target="_blank">进入管理控制台</a></span>
       </li>
       <li class="lastChild lastChild1">
         <a class="exit" href="javascript:;" ng-click="loginOut('out')">退出</a>
-        <!--<span class="list1"><a  href="javascript:void();" onclick="loginOut('cancel')">删除账号</a></span>-->
+
       </li>
     </ul>
   </div>
@@ -123,8 +126,8 @@
     border-radius: 0;
     border-left:0;
   }
-  .checkbox {
-
+  form.login .checkbox {
+    margin-top: 20px;
   }
   .checkbox label {
     margin-left: 40px;
@@ -158,7 +161,7 @@
   form.login span.error.is-visible {
     visibility: visible;
     opacity: 1;
-    right: 25px;
+    right: 68px;
     /*-ms-filter: "alpha(Opacity=100)";
     -webkit-transform: translate(0,0);
     -ms-transform: translate(0,0);
@@ -171,7 +174,7 @@
   form.login span.error {
     visibility: hidden;
     position: absolute;
-    top: -3px;
+    top: 70px;
     right: -85px;
     padding: 0 8px;
     line-height: 40px;
@@ -189,7 +192,7 @@
     -o-transition: all 0.25s; /* Opera */
   }
   #loginAfter {
-    height: 198px;
+    height: 230px;
     width: 272px;
     background-color: #ededed;
     border: 1px solid #e5e5e5;

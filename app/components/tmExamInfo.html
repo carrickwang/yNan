@@ -1,36 +1,76 @@
-<!--@*考试信息*@-->
-<div class="examInfo border_1">
-  <div class="main_header_2">
-    <img src="images/header.png" alt=""><span>考试信息</span><i class="link_more"><a href="#/articleList/25651">更多>></a></i>
-  </div>
-  <div class="examList" dw-loading="examInfo">
-    <ul>
-      <li ng-repeat="examData in examData.ListData">
-        <span class="dot"></span><a href="#/articleDetail/{{examData.Id}}" target="_blank" title="{{examData.Name}}">{{examData.Name}}</a>
-      </li>
-    </ul>
+<div class="examInfo border_1 tmBorder-blue">
+  <ol class="breadcrumb">
+    <li class="currentPosition">您的当前位置:</li>
+    <li><a href="#/main">首页</a></li>
+    <li class="active"><span>考试信息</span></li>
+  </ol>
+  <div>
+    <div class="examInfoHeader" >
+      <h1>考试信息</h1>
+    </div>
+    <table class="table">
+      <tr class="titleBg">
+        <th class="list1">职业技能资格</th>
+        <th class="list1">培训机构</th>
+        <th class="list2">考试时间</th>
+        <th class="list1">考试地点</th>
+      </tr>
+      <tr ng-repeat="listData in examInfoList">
+        <td class="list1" title="{{listData.ExamName}}">{{listData.ExamName}}</td>
+        <td class="list1" title="{{listData.GroupName}}">{{listData.GroupName}}</td>
+        <td class="list2">{{listData.StartTime | dateFilter | date:'yyyy-MM-dd'}}-{{listData.EndTime | dateFilter | date:'yyyy-MM-dd'}}</td>
+        <td class="list1" title="{{listData.Place}}">{{listData.Place}}</td>
+      </tr>
+    </table>
+    <div tm-pagation conf="paginationConf"></div>
   </div>
 </div>
-
 <style>
-  .examInfo {
-    height: 198px;
-    background: #fff;
+  .examInfoHeader > h1{
+    line-height: 49px;
+    padding-left: 49px;
+    font-size: 22px;
+    color: rgb(51,51,51);
+    margin-top: -20px;
   }
-  .examInfo .examList {
-    margin-top: 10px;
+  .examInfo table th{
+    text-align: center;
+    font-weight: bold;
+
   }
-  .examInfo .examList a{
-    text-decoration: none;
+  .examInfo table th{
+
+  }
+  .examInfo table td >a{
     display: inline-block;
-    width: 210px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    vertical-align: middle;
+    width: 480px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .examInfo .examList a:visited{
-    color: inherit;
+  .examInfo .titleBg{
+    background: #edf3fc;
+  }
+  .examInfo .table th{
+    font-weight: 600;
+  }
+  .examInfo .table th,.examInfo .table td{
+    text-align: center;
+  }
+  .examInfo .table th.list1{
+    width: 100px;
+  }
+  .examInfo .table td.list1{
+    width: 100px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+  }
+  .examInfo .table th.list2{
+    width: 180px;
+  }
+  .examInfo .table td.list2{
+    width: 180px;
+
   }
 </style>
-

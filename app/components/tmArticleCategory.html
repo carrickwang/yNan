@@ -1,9 +1,11 @@
 <div class="articleCategory border_1 tmBorder-blue">
   <div class="articleCategoryTitle" >
-    <h1>{{categoryData.TitleNav}}</h1>
+    <h1>新闻资讯</h1>
   </div>
   <ul>
-    <li ng-repeat="categoryData in categoryData.ListData"><a class="btn" ng-click="refreshList({categoryId:categoryData.Id})" href="javascript:;">{{categoryData.Name}}</a></li>
+    <!--<li ng-repeat="categoryData in categoryData.ListData"><a class="btn" ng-click="refreshList({categoryId:categoryData.Id})" href="javascript:;">{{categoryData.Name}}</a></li>-->
+    <li><a class="btn" ng-click="refreshList({categoryId:25640})" href="javascript:;">政策法规</a></li>
+    <li><a class="btn" ng-click="refreshList({categoryId:781337})" href="javascript:;">工作动态</a></li>
   </ul>
 </div>
 <style>

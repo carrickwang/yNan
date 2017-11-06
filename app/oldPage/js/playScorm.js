@@ -17,8 +17,6 @@ if (!portalId || !userId || !courseId) {
     }
 }
 
-
-
 function LMSInitialize(value) {
     var reCode = "";
     return true;
@@ -46,14 +44,32 @@ function LMSSetValue(name, value) {
                     }
                 }
             });
-
             break;
         case "cmi.core.credit":
             paraName = "cmi.core.credit";
             break;
         case "cmi.core.lesson_status":
             paraName = "cmi.core.lesson_status";
+          $.ajax({
+            type: "post",
+            url: API_URL + "/CourseProcess/ScormProcess?m=" + paraName + "&v=" + value,
+            data: { "PortalId": portalId, "userid": userId, "courseid": courseId, "position": value },
+            success: function (result) {
+
+            }
+          });
             break;
+      case "cmi.core.lesson_progress":
+        paraName = "cmi.core.lesson_progress";
+        $.ajax({
+          type: "post",
+          url: API_URL + "/CourseProcess/ScormProcess?m=" + paraName + "&v=" + value,
+          data: { "PortalId": portalId, "userid": userId, "courseid": courseId, "position": value },
+          success: function (result) {
+
+          }
+        });
+        break;
         case "cmi.core.entry":
             paraName = "cmi.core.entry";
             break;
@@ -85,6 +101,14 @@ function LMSSetValue(name, value) {
             break;
         case "cmi.suspend_data":
             paraName = "cmi.suspend_data";
+          $.ajax({
+          type: "post",
+          url: API_URL + "/CourseProcess/ScormProcess?m=" + paraName + "&v=" + value,
+          data: { "PortalId": portalId, "userid": userId, "courseid": courseId, "position": value },
+          success: function (result) {
+
+          }
+        });
             break;
         default:
             break;

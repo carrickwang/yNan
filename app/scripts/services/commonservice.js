@@ -194,7 +194,8 @@ angular.module('luZhouApp')
     this.keepOnline = function () {
       setInterval(function () {
         $http({
-          method:'GET',
+          method:'POST',
+          data:{},
           url:ALL_PORT.KeepOnline.url
         }).success(function(response){
         });

@@ -211,7 +211,7 @@ angular
         controller: 'MessagedetailCtrl',
         controllerAs: 'messageDetail'
       })
-      .when('/exam/exam/:Id', {
+      .when('/exam/exam/:Type/:Id', {
         templateUrl: 'views/exam/exam.html',
         controller: 'ExamCtrl',
         controllerAs: 'exam'
@@ -226,7 +226,7 @@ angular
         controller: 'ExamdetaillistCtrl',
         controllerAs: 'examDetailList'
       })
-      .when('/exam/examReview/:examId/:recordId', {
+      .when('/exam/examReview/:Type/:examId/:recordId', {
         templateUrl: 'views/exam/examreview.html',
         controller: 'ExamreviewCtrl',
         controllerAs: 'examReview'
@@ -260,6 +260,26 @@ angular
         templateUrl: 'views/exam/examgrade.html',
         controller: 'examGradeCtrl',
         controllerAs: 'examGrade'
+      })
+      .when('/personalCenter/trainPlan', {
+        templateUrl: 'views/personalCenter/trainplan.html',
+        controller: 'TrainplanCtrl',
+        controllerAs: 'trainplan'
+      })
+      .when('/main/traininfo', {
+        templateUrl: 'views/main/traininfo.html',
+        controller: 'TraininfoCtrl',
+        controllerAs: 'traininfo'
+      })
+      .when('/main/examinfo', {
+        templateUrl: 'views/main/examinfo.html',
+        controller: 'ExaminfoCtrl',
+        controllerAs: 'examinfo'
+      })
+      .when('/news/servicelist', {
+        templateUrl: 'views/news/servicelist.html',
+        controller: 'ServicelistCtrl',
+        controllerAs: 'servicelist'
       })
       .otherwise({
         redirectTo: '/main'

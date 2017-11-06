@@ -42,20 +42,20 @@ angular.module('luZhouApp')
                 mobile: /^1[3|4|5|7|8][0-9]\d{4,8}$/,
                 email: /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,
                 tel: /^0\d{2,3}-?\d{7,8}$/
-            }
-            if (reg.mobile.test(options.Mobile) && reg.tel.test(options.Tel) && reg.email.test(options.Email)) {
-                var updateUserInfo = commonService.getData(ALL_PORT.UpdateUserInfo.url, 'POST', $.extend({}, ALL_PORT.UpdateUserInfo.data, options, token));
-                updateUserInfo.then(function(response) {
-                    alert(response.Message);
-                    window.reload();
-                });
-            } else if (!reg.mobile.test(options.Mobile)) {
+            };
+             if (options.Mobile !=='' && !reg.mobile.test(options.Mobile)) {
                 alert('请输入正确格式的手机号');
-            } else if (!reg.tel.test(options.Tel)) {
+            } else if (options.Tel !=='' && !reg.tel.test(options.Tel)) {
                 alert('请输入正确格式的电话');
-            } else if (!reg.email.test(options.Email)) {
+            } else if (options.Email!=='' && !reg.email.test(options.Email)) {
                 alert('请输入正确格式的邮箱');
-            }
+            }else{
+            var updateUserInfo = commonService.getData(ALL_PORT.UpdateUserInfo.url, 'POST', $.extend({}, ALL_PORT.UpdateUserInfo.data, options, token));
+            updateUserInfo.then(function(response) {
+              alert(response.Message);
+              window.reload();
+            });
+          }
         };
 
 

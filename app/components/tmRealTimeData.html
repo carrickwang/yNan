@@ -12,16 +12,16 @@
         <span class="dot"></span><span>学员注册人数：<span>{{realTimeData.Model.UsersCount}}</span></span>
       </li>
       <li>
-        <span class="dot"></span><span>标准课件数量：<span>{{realTimeData.Model.CourseCount}}</span></span>
+        <span class="dot"></span><span>技能培训课程数量：<span>{{realTimeData.Model.SkillCourseCount}}</span></span>
       </li>
       <li>
-        <span class="dot"></span><span>参考课件数量：<span>{{realTimeData.Model.CourseCount}}</span></span>
+        <span class="dot"></span><span>引导性培训课程数量：<span>{{realTimeData.Model.GuidingCourseCount}}</span></span>
       </li>
       <li>
         <span class="dot"></span><span>在线学员人数：<span>{{realTimeData.Model.OnlineUsersCount}}</span></span>
       </li>
       <li>
-        <span class="dot"></span><span>完成学习人数：<span>{{realTimeData.Model.UserFinishCount}}</span></span>
+        <span class="dot"></span><span>完成考核人数：<span>{{realTimeData.Model.PassCount}}</span></span>
       </li>
       <li>
         <span class="dot"></span><span>访问学习次数：<span>{{realTimeData.Model.UserVisitCount}}</span></span>
@@ -31,14 +31,17 @@
 </div>
 <style>
   .realTimeData {
-    height: 200px;
+    height: 216px;
     background-color: #fff;
+  }
+  .realTimeData li{
+    line-height: 25px;
   }
   .realTimeData li span{
     line-height: 20px;
   }
   .realTimeData .realTimeList{
-    margin-top:12px;
+    margin-top:6px;
   }
 </style>
 <script>
@@ -47,7 +50,6 @@
 <img id="spimg" onload="getbandwidth();" width=0 height=0>
 
 <script>
-
   function getbandwidth()
   {
     var filesize = 106;//measured in KB

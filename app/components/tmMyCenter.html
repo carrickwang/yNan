@@ -18,9 +18,10 @@
   </form>
   <div class="myTab">
     <ul class="nav nav-tabs" ng-init="vm.activeTab=1">
-      <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1;searchMyCenterCourse({'courseType':'Unfinish','title':searchTitle})">正在学习的课程 <span>({{TotalData.UnfinishCount}})</span></a></li>
-      <li ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeTab = 2;searchMyCenterCourse({'courseType':'Appointed','title':searchTitle})">指定到您的课程 <span>({{TotalData.AppointedCount}})</span></a></li>
-      <li ng-class="{active: vm.activeTab == 3}"><a href="javascript:;" ng-click="vm.activeTab = 3;searchMyCenterCourse({'courseType':'Finish','title':searchTitle})">已完成的课程 <span>({{TotalData.FinishCount}})</span></a></li>
+      <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1;searchMyCenterCourse({'courseType':'StudyingSkill','title':searchTitle})">技能技能课程 <span>({{TotalData.UnfinishCount}})</span></a></li>
+      <li ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeTab = 2;searchMyCenterCourse({'courseType':'FinishSkill','title':searchTitle})">非取证技能课程 <span>({{TotalData.FinishCount}})</span></a></li>
+      <li ng-class="{active: vm.activeTab == 3}"><a href="javascript:;" ng-click="vm.activeTab = 3;searchMyCenterCourse({'courseType':'StudyingGuidance','title':searchTitle})">正在学习的引导性课程 <span>({{TotalData.AppointedCount}})</span></a></li>
+      <li ng-class="{active: vm.activeTab == 4}"><a href="javascript:;" ng-click="vm.activeTab = 4;searchMyCenterCourse({'courseType':'FinishGuidance','title':searchTitle})">完成的引导性课程 <span>({{TotalData.FinishGuidanceCount}})</span></a></li>
     </ul>
     <div class="tab-content" dw-loading="myCenter">
       <div class="tab-panel perlist" ng-show="vm.activeTab == 1">
@@ -28,35 +29,23 @@
           <span class="list1">课程名称</span>
           <span class="list2"><a href="javascript:;" class="getorder" ng-click="learningProgress('Unfinish')"><span>▼</span>学习进度</a></span>
           <span class="list3">&nbsp;</span>
-          <span class="list6">学时</span>
+          <!--<span class="list5">内容</span>-->
+          <span class="list5">已学学时</span>
           <span class="list5">类型</span>
-          <span class="list4">播放</span>
-          <span class="list4">笔记</span>
-          <span class="list4">计划</span>
-          <span class="list4">测试</span>
-          <span class="list4">删除</span>
+          <span class="list6">培训时间</span>
+          <span class="list6">考试时间</span>
         </div>
-        <div class="list" ng-repeat="unFinish in TotalData.ListData.UnfinishModel">
+        <div class="list" ng-repeat="StudyingSkill in TotalData.ListData.StudyingSkill">
           <p class="clearfix">
-            <span class="list1 cur_name"><a href="#/courseCenter/courseDetails/{{unFinish.Id}}">{{unFinish.Name}}</a></span>
-            <span class="list2"><span class="jd_box"><span class="jd_bg" ng-style="{'width':unFinish.BrowseScore+'%'};">&nbsp;</span></span></span>
-            <span class="list3">{{unFinish.BrowseScore}}%</span>
-            <span class="list6">{{unFinish.Credit}}</span>
-            <span class="list5">{{unFinish.Type}}</span>
-            <span class="list4"><a href="#/play/play/{{unFinish.Id}}" target="_blank">播放</a></span>
-            <!--<span class="list4"><a href=""  data-toggle="modal" data-target=".notemodal">{{unFinish.NoteFlag?"查看":"添加"}}</a></span>-->
-            <span class="list4" ng-if="unFinish.NoteFlag"><a href="" ng-click="seeNote(unFinish.Id,unFinish.Name)"  data-toggle="modal" data-target=".notemodal">查看</a></span>
-            <span class="list4" ng-if="!unFinish.NoteFlag"><a href="" ng-click="nodeAdd(unFinish.Id)"  data-toggle="modal" data-target=".notemodal">添加</a></span>
-
-            <!--<span class="list4"><a href="">{{unFinish.PlanId?"查看":"添加"}}</a></span>-->
-            <span class="list4" ng-if="unFinish.PlanId"><a href="" ng-click="seePlan(unFinish.PlanId,unFinish.Name)" data-toggle="modal" data-target=".notemodal2">查看</a></span>
-            <span class="list4" ng-if="!unFinish.PlanId"><a href="" ng-click="planAdd(unFinish.Id)"  data-toggle="modal" data-target=".notemodal2">添加</a></span>
-
-
-            <span ng-if="unFinish.ExamFlag&&unFinish.BrowseScore<100" class="list4">有考试</span>
-            <span ng-if="unFinish.ExamFlag&&unFinish.BrowseScore==100" class="list4"><a ng-click="courseExamList(unFinish.Id)" href="javascript:;" data-toggle="modal" data-target=".seeTest">查看</a></span>
-            <span ng-if="!unFinish.ExamFlag" class="list4">无</span>
-            <span class="list4"><a href="javascript:;" ng-click="deleatUserCourse(unFinish.Id)"><img src="images/del.jpg"/></a></span>
+            <span class="list1 cur_name" title="{{StudyingSkill.Name}}"><a href="#/courseCenter/courseDetails/{{StudyingSkill.Id}}">{{StudyingSkill.Name}}</a></span>
+            <span class="list2"><span class="jd_box"><span class="jd_bg" ng-style="{'width':StudyingSkill.BrowseScore+'%'};">&nbsp;</span></span></span>
+            <span class="list3">{{StudyingSkill.BrowseScore}}%</span>
+            <!--<span class="list5 red">详细</span>-->
+            <span class="list5">{{StudyingSkill.Credit}}</span>
+            <span class="list5">{{StudyingSkill.Type}}</span>
+            <span class="list6">{{StudyingSkill.ExamDate | dateFilter | date:'yyyy-MM-dd'}}</span>
+            <!--<span class="list5"><a href="#/play/play/{{StudyingSkill.Id}}" target="_blank">播放</a></span>-->
+            <span class="list6">{{StudyingSkill.ExamDate | dateFilter | date:'yyyy-MM-dd'}}</span>
           </p>
         </div>
         <div ng-transclude="pagation"></div>
@@ -64,36 +53,28 @@
       <div class="tab-panel perlist" ng-show="vm.activeTab == 2">
         <div class="title_bar clearfix">
           <span class="list1">课程名称</span>
-          <span class="list2"><a  ng-click="learningProgress('Appointed')" href="javascript:;" class="getorder"><span>▼</span>学习进度</a></span>
+          <span class="list2"><a href="javascript:;" class="getorder" ng-click="learningProgress('Unfinish')"><span>▼</span>学习进度</a></span>
           <span class="list3">&nbsp;</span>
-          <span class="list6">学时</span>
+          <!--<span class="list3">内容</span>-->
+          <!--<span class="list6">完成时间</span>-->
+          <span class="list5">已学学时</span>
           <span class="list5">类型</span>
-          <span class="list4">播放</span>
-          <span class="list4">笔记</span>
-          <span class="list4">计划</span>
-          <span class="list4">测试</span>
-          <span class="list4">删除</span>
+          <!--<span class="list4">播放</span>-->
+          <span class="list6">培训时间</span>
+          <span class="list6">考试时间</span>
         </div>
-        <div class="list" ng-repeat="Appointed in TotalData.ListData.AppointedModel">
+        <div class="list" ng-repeat="FinishSkill in TotalData.ListData.FinishSkill">
           <p class="clearfix">
-            <span class="list1 cur_name"><a href="#/courseCenter/courseDetails/{{Appointed.Id}}">{{Appointed.Name}}</a></span>
-            <span class="list2"><span class="jd_box"><span class="jd_bg" ng-style="{'width':Appointed.BrowseScore+'%'};">&nbsp;</span></span></span>
-            <span class="list3">{{Appointed.BrowseScore}}%</span>
-            <span class="list6">{{Appointed.Credit}}</span>
-            <span class="list5">{{Appointed.Type}}</span>
-            <span class="list4"><a href="#/play/play/{{Appointed.Id}}" target="_blank">播放</a></span>
-            <!--<span class="list4"><a href="javascript:void(0)">{{Appointed.NoteFlag?"查看":"添加"}}</a></span>-->
-            <span class="list4" ng-if="Appointed.NoteFlag"><a href="" ng-click="seeNote(Appointed.Id,Appointed.Name)"  data-toggle="modal" data-target=".notemodal">查看</a></span>
-            <span class="list4" ng-if="!Appointed.NoteFlag"><a href="" ng-click="nodeAdd(Appointed.Id)"  data-toggle="modal" data-target=".notemodal">添加</a></span>
-
-            <!--<span class="list4"><a href="javascript:void(0)">{{Appointed.PlanId?"查看":"添加"}}</a></span>-->
-            <span class="list4" ng-if="Appointed.PlanId"><a href="" ng-click="seePlan(Appointed.PlanId,Appointed.Name)" data-toggle="modal" data-target=".notemodal2">查看</a></span>
-            <span class="list4" ng-if="!Appointed.PlanId"><a href="" ng-click="planAdd(Appointed.Id)"  data-toggle="modal" data-target=".notemodal2">添加</a></span>
-
-            <span ng-if="Appointed.ExamFlag&&Appointed.BrowseScore<100" class="list4">有考试</span>
-            <span ng-if="Appointed.ExamFlag&&Appointed.BrowseScore==100" class="list4"><a ng-click="courseExamList(Appointed.Id)" href="javascript:;" data-toggle="modal" data-target=".seeTest">查看</a></span>
-            <span ng-if="!Appointed.ExamFlag" class="list4">无</span>
-            <span class="list4"><a ng-click="deleatUserCourse(Appointed.Id)"><img src="images/del.jpg" /></a></span>
+            <span class="list1 cur_name" title="{{FinishSkill.Name}}"><a href="#/courseCenter/courseDetails/{{FinishSkill.Id}}">{{FinishSkill.Name}}</a></span>
+            <span class="list2"><span class="jd_box"><span class="jd_bg" ng-style="{'width':FinishSkill.BrowseScore+'%'};">&nbsp;</span></span></span>
+            <span class="list3">{{FinishSkill.BrowseScore}}%</span>
+            <!--<span class="list3 red">详细</span>-->
+            <!--<span class="list6">{{FinishSkill.FinishDate | dateFilter | date:'yyyy-MM-dd'}}</span>-->
+            <span class="list5">{{FinishSkill.Credit}}</span>
+            <span class="list5">{{FinishSkill.Type}}</span>
+            <span class="list6">{{FinishSkill.ExamDate | dateFilter | date:'yyyy-MM-dd'}}</span>
+            <!--<span class="list4"><a href="#/play/play/{{FinishSkill.Id}}" target="_blank">播放</a></span>-->
+            <span class="list6">{{FinishSkill.ExamDate | dateFilter | date:'yyyy-MM-dd'}}</span>
           </p>
         </div>
         <div ng-transclude="pagation"></div>
@@ -103,270 +84,48 @@
           <span class="list1">课程名称</span>
           <span class="list2"><a ng-click="learningProgress('Finish')" href="javascript:;" class="getorder"><span>▼</span>学习进度</a></span>
           <span class="list3">&nbsp;</span>
-          <span class="list6">学时</span>
-          <span class="list5">类型</span>
-          <span class="list4">播放</span>
-          <span class="list4">笔记</span>
-          <span class="list4">计划</span>
-          <span class="list4">测试</span>
-          <span class="list4">删除</span>
+          <span class="list6">已学学时</span>
+          <span class="list6">类型</span>
+          <span class="list6">播放</span>
+          <span class="list6">删除</span>
         </div>
-        <div class="list" ng-repeat="Finish in TotalData.ListData.FinishModel">
+        <div class="list" ng-repeat="StudyingGuidance in TotalData.ListData.StudyingGuidance">
           <p class="clearfix">
-            <span class="list1 cur_name"><a href="#/courseCenter/courseDetails/{{Finish.Id}}">{{Finish.Name}}</a></span>
-            <span class="list2"><span class="jd_box"><span class="jd_bg" ng-style="{'width':Finish.BrowseScore+'%'};">&nbsp;</span></span></span>
-            <span class="list3">{{Finish.BrowseScore}}%</span>
-            <span class="list6">{{Finish.Credit}}</span>
-            <span class="list5">{{Finish.Type}}</span>
-            <span class="list4"><a href="#/play/play/{{Finish.Id}}" target="_blank">播放</a></span>
-            <!--<span class="list4"><a href="javascript:void(0)">{{Finish.NoteFlag?"查看":"添加"}}</a></span>-->
-            <span class="list4" ng-if="Finish.NoteFlag"><a href="" ng-click="seeNote(Finish.Id,Finish.Name)"  data-toggle="modal" data-target=".notemodal">查看</a></span>
-            <span class="list4" ng-if="!Finish.NoteFlag"><a href="" ng-click="nodeAdd(Finish.Id)"  data-toggle="modal" data-target=".notemodal">添加</a></span>
-
-            <!--<span class="list4"><a href="javascript:void(0)">{{Finish.PlanId?"查看":"添加"}}</a></span>-->
-            <span class="list4" ng-if="Finish.PlanId"><a href="" ng-click="seePlan(Finish.PlanId,Finish.Name)" data-toggle="modal" data-target=".notemodal2">查看</a></span>
-            <span class="list4" ng-if="!Finish.PlanId"><a href="" ng-click="planAdd(Finish.Id)"  data-toggle="modal" data-target=".notemodal2">添加</a></span>
-
-            <span ng-if="Finish.ExamFlag&&Finish.BrowseScore<100" class="list4">有考试</span>
-            <span ng-if="Finish.ExamFlag&&Finish.BrowseScore==100" class="list4"><a ng-click="courseExamList(Finish.Id)" data-toggle="modal" data-target=".seeTest">查看</a></span>
-            <span ng-if="!Finish.ExamFlag" class="list4">无</span>
-            <span class="list4"><a href="javascript:;" ng-click="deleatUserCourse(Finish.Id)"><img src="images/del.jpg" /></a></span>
+            <span class="list1 cur_name" title="{{StudyingGuidance.Name}}"><a href="#/courseCenter/courseDetails/{{StudyingGuidance.Id}}">{{StudyingGuidance.Name}}</a></span>
+            <span class="list2"><span class="jd_box"><span class="jd_bg" ng-style="{'width':StudyingGuidance.BrowseScore+'%'};">&nbsp;</span></span></span>
+            <span class="list3">{{StudyingGuidance.BrowseScore}}%</span>
+            <span class="list6">{{StudyingGuidance.Credit}}</span>
+            <span class="list6">{{StudyingGuidance.Type}}</span>
+            <span class="list6"><a href="#/play/play/{{StudyingGuidance.Id}}" target="_blank">播放</a></span>
+            <span class="list6"><a href="javascript:;" ng-click="deleatUserCourse(Finish.Id)"><img src="images/del.jpg" /></a></span>
           </p>
         </div>
         <div ng-transclude="pagation"></div>
       </div>
-      <!-- Modal笔记 -->
-      <div class="modal fade notemodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content"  ng-show="modalBody1">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">添加笔记</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table table-bordered">
-                <tbody>
-                <tr>
-                  <td>课程名称：</td>
-                  <td>{{nodeAddData.CourseName}}</td>
-                </tr>
-                <tr>
-                  <td>笔记名称：</td>
-                  <td>
-                    <input id="txtName" name="Name" class="txt" type="text" ng-model="noteName">
-                  </td>
-                </tr>
-                <tr>
-                  <td>内    容：</td>
-                  <td>
-                    <textarea ng-model="noteContent" id="txtContent" name="Content" cols="50" rows="5" type="text" class="txt2"></textarea>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-              <button ng-click="editNote({Name:noteName,Content:noteContent,CourseId:nodeAddData.CourseId})" type="button" class="btn btn-primary">提交</button>
-            </div>
-          </div>
-          <div class="modal-content"  ng-show="modalBody2">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">{{seeNoteData.CourseName}}</h4>
-            </div>
-            <div class="modal-body" ng-show="modalBody21">
-              <table class="table table-bordered">
-                <tbody>
-                <tr ng-repeat="seeList in seeNoteData.ListData">
-                  <td>笔记名称：</td>
-                  <td class="seaNote">
-                    <span class="pull-left">{{seeList.Name}}</span>
-                    <a class="pull-right" href="" ng-click="delNote(seeList.Id)">删除</a>
-                    <a class="pull-right" href="" ng-click="noteUpdate(seeList.Id)">编辑</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <div id="content_page" class="content_page">
-                      <span class="p_num current">{{seeNoteData.Page}}</span><span>共 {{Math.ceil(seeNoteData.Count/seeNoteData.Rows)}} 页,总记录 {{seeNoteData.Count}} 条</span>
-                      <a class="btn btn-danger newnote pull-right" ng-click="nodeAdd(courseId)">添加笔记</a>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-body" ng-hide="modalBody21">
-              <table class="table table-bordered">
-                <tbody>
-                <tr>
-                  <td>笔记名称：</td>
-                  <td>
-                    <input id="txtName2" name="Name" class="txt" type="text" ng-model="noteName">
-                  </td>
-                </tr>
-                <tr>
-                  <td>内    容：</td>
-                  <td>
-                    <textarea ng-model="noteContent" id="txtContent2" name="Content" cols="50" rows="5" type="text" class="txt2"></textarea>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer" ng-hide="modalBody21">
-              <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-              <button ng-click="addNoteUpdate({Name:noteName,Content:noteContent})" type="button" class="btn btn-primary">提交</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-          </div>
+      <div class="tab-panel perlist" ng-show="vm.activeTab == 4">
+        <div class="title_bar clearfix">
+          <span class="list1">课程名称</span>
+          <span class="list2"><a ng-click="learningProgress('Finish')" href="javascript:;" class="getorder"><span>▼</span>学习进度</a></span>
+          <span class="list3">&nbsp;</span>
+          <span class="list6">完成时间</span>
+          <span class="list5">已学学时</span>
+          <span class="list5">类型</span>
+          <span class="list5">播放</span>
+          <span class="list5">删除</span>
         </div>
-        <div class="preventorgery"></div>
-      </div>
-      <!-- Modal计划 -->
-      <div class="modal fade notemodal2" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content"  ng-show="modalBody1">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">添加计划</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table table-bordered">
-                <tbody>
-                <tr>
-                  <td>课程名称：</td>
-                  <td style="text-align: left">{{planAddData.CourseName}}</td>
-                </tr>
-                <tr>
-                  <td>计划完成日期：</td>
-                  <td>
-                    <!--<div datetimepicker dateID="timepicker1" ng-model="planAddData.PlanFinishDate" class="form-control"></div>-->
-                    <input id="timepicker1" class="datebg" datepicker ng-model="PlanFinishDate"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>开始提醒日期：</td>
-                  <td>
-                    <!--<div datetimepicker dateID="timepicker2" ng-model="planAddData.RemindDate" class="form-control"></div>-->
-                    <input id="timepicker2" class="datebg" datepicker ng-model="RemindDate"/>
-
-                  </td>
-                </tr>
-                <tr>
-                  <td>提醒周期：</td>
-                  <td style="text-align: left">
-                    <select ng-init="selectedName2 = remindCycle[0]" ng-model="selectedName2" ng-options="x for x in remindCycle">
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td>提醒方式：</td>
-                  <td style="text-align: left">
-                    站内通知
-                  </td>
-                </tr>
-                <tr>
-                  <td>计划说明：</td>
-                  <td>
-                    <textarea ng-model="planAddData.planAddData" id="txtContent3" name="Content" cols="50" rows="5" type="text" class="txt2"></textarea>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button ng-click="addPlan({PlanFinishDate:PlanFinishDate,RemindDate:RemindDate,RemindCycle:selectedName2,Remark:planAddData.planAddData,CourseId:planAddData.CourseId})" type="button" class="btn btn-primary">提交</button>
-            </div>
-          </div>
-          <div class="modal-content"  ng-show="modalBody2">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">修改计划</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table table-bordered">
-                <tbody>
-                <tr>
-                  <td>课程名称：</td>
-                  <td style="text-align: left">{{seePlanData.CourseName}}</td>
-                </tr>
-                <tr>
-                  <td>计划完成日期：</td>
-                  <td>
-                    <!--<div datetimepicker dateID="timepicker3" ng-model="seePlanData.PlanFinishDate" class="form-control"></div>-->
-                    <input id="timepicker3" class="datebg" datepicker ng-model="PlanFinishDate2"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>开始提醒日期：</td>
-                  <td>
-                    <!--<div datetimepicker dateID="timepicker4" ng-model="seePlanData.RemindDate" class="form-control"></div>-->
-                    <input id="timepicker4" class="datebg" datepicker ng-model="RemindDate2"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>提醒周期：</td>
-                  <td style="text-align: left">
-                    <select ng-model="selectedName3" ng-options="x for x in remindCycle">
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td>提醒方式：</td>
-                  <td style="text-align: left">
-                    站内通知
-                  </td>
-                </tr>
-                <tr>
-                  <td>计划说明：</td>
-                  <td>
-                    <textarea ng-model="seePlanData.Remark" id="txtContent4" name="Content" cols="50" rows="5" type="text" class="txt2"></textarea>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-              <button ng-click="addPlanUpdate({PlanFinishDate:PlanFinishDate2,RemindDate:RemindDate2,RemindCycle:selectedName3,Remark:seePlanData.Remark,CourseId:seePlanData.CourseId,Id:seePlanData.Id})" type="button" class="btn btn-primary">提交</button>
-            </div>
-          </div>
+        <div class="list" ng-repeat="FinishGuidance in TotalData.ListData.FinishGuidance">
+          <p class="clearfix">
+            <span class="list1 cur_name" title="{{FinishGuidance.Name}}"><a href="#/courseCenter/courseDetails/{{FinishGuidance.Id}}">{{FinishGuidance.Name}}</a></span>
+            <span class="list2"><span class="jd_box"><span class="jd_bg" ng-style="{'width':FinishGuidance.BrowseScore+'%'};">&nbsp;</span></span></span>
+            <span class="list3">{{FinishGuidance.BrowseScore}}%</span>
+            <span class="list6">{{FinishGuidance.FinishDate | dateFilter | date:'yyyy-MM-dd'}}</span>
+            <span class="list5">{{FinishGuidance.Credit}}</span>
+            <span class="list5">{{FinishGuidance.Type}}</span>
+            <span class="list5"><a href="#/play/play/{{FinishGuidance.Id}}" target="_blank">播放</a></span>
+            <span class="list5"><a href="javascript:;" ng-click="deleatUserCourse(Finish.Id)"><img src="images/del.jpg" /></a></span>
+          </p>
         </div>
-        <div class="preventorgery"></div>
-      </div>
-      <!--Modal查看考试-->
-      <div class="modal fade seeTest" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">添加计划</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table table-bordered">
-                <thead>
-                <tr>
-                  <th>考试名称</th>
-                  <th>考试学分</th>
-                  <th>时限</th>
-                  <th>参加测试</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="test in courseExamListData.ListData">
-                  <td>{{test.Name}}</td>
-                  <td>{{test.CreditHour}}</td>
-                  <td>{{test.TimeLimit}}</td>
-                  <td><a href="" target="_blank" ng-click="havTest(test.Id)">参加测试</a></td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="preventorgery"></div>
+        <div ng-transclude="pagation"></div>
       </div>
     </div>
   </div>
@@ -374,7 +133,7 @@
 </div>
 <style>
   .myTab .perlist .list1 {
-    width: 200px;
+    width: 160px;
     height: 37px;
   }
   .myTab .perlist .list .list1 {
@@ -386,23 +145,23 @@
     padding-right: 10px;
   }
   .myTab .perlist .list2 {
-    width: 100px;
+    width: 90px;
   }
   .myTab .perlist .list .list2 {
     position: relative;
     top: 10px;
   }
   .myTab .perlist .list3 {
-    width: 50px;
+    width: 45px;
   }
   .myTab .perlist .list4 {
     width: 42px;
   }
   .myTab .perlist .list5 {
-    width: 70px;
+    width: 60px;
   }
   .myTab .perlist .list6 {
-    width: 55px;
+    width: 93px;
   }
   .myTab .perlist .list2 .jd_box {
     border: 1px solid #7abc1d;

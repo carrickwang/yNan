@@ -23,7 +23,7 @@ angular.module('luZhouApp')
       '/共<strong>{{ conf.totalItems }}</strong>条 ' +
       '跳转至<input type="text" ng-model="jumpPageNum" ng-keyup="jumpPageKeyUp($event)"/>' +
       '</div>' +
-      '<div class="no-items" ng-show="conf.totalItems <= 0">暂无数据</div>' +
+      '<div class="no-items" ng-show="conf.totalItems <= 0"style="font-size: 16px;line-height: 40px;">暂无数据</div>' +
       '</div>',
       replace: true,
       scope: {

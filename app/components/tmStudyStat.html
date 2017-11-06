@@ -15,7 +15,7 @@
     <div class="form-group">
       <input id="endTime" class="datebg" datepicker ng-model="endTime" select="updateMyText(date)"/>
     </div>
-    <button type="submit" class="btn btn-danger" ng-click="requestMyStudyStat({StartData:startTime,EndData:endTime})">查询</button>
+    <button type="submit" class="btn btn-danger" ng-click="requestMyStudyStat({StartDate:startTime,EndDate:endTime})">查询</button>
   </form>
   <p>
     尊敬的 <b>{{studyStatData.Account}}</b>, 截止 <b>{{studyStatData.StartDate}} 至 {{studyStatData.EndDate}} </b>, 您的学习状态：<b>学习中</b> , 您已经累计获得课程学分 <b>{{studyStatData.CreditSum}}</b> 学分 , 您已经选修 <b>{{studyStatData.Count}}</b> 门课程, 已经完成 <b>{{studyStatData.FinishCourse}}</b> 门课程, 您目前正在学习 <b>{{studyStatData.UnFinishCourse}}</b> 门课程。

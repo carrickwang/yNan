@@ -5,69 +5,118 @@
     <li><a href="#/main">首页</a></li>
     <li class="active">在线考试</li>
   </ol>
-  <form class="form-inline formCourse">
-    <select class="form-control" ng-init="selectedName = courseStatus[0]" ng-model="selectedName" ng-options="x.name for x in courseStatus" ng-change="selectChangeFun(selectedName.id)">
-    </select>
-    <div class="form-group">
-      <input ng-model="searchTitle" type="text" class="form-control" style="width: 400px;" my-placeholder placeholder="请输入要搜索的考试">
-    </div>
-    <button type="submit" class="btn btn-default" ng-click="searchMyCenterCourse({'examType':selectedName.id,'title':searchTitle},1)">搜索</button>
-  </form>
-  <div class="myTab">
-    <ul class="nav nav-tabs" ng-init="vm.activeTab=1">
-      <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1;searchMyCenterCourse({'examType':'UnFinish','title':searchTitle})">未完成的考试</a></li>
-      <li ng-class="{active: vm.activeTab == 3}"><a href="javascript:;" ng-click="vm.activeTab = 3;searchMyCenterCourse({'examType':'Finish','title':searchTitle})">已完成的考试</a></li>
-    </ul>
-    <div class="tab-content" dw-loading="examList">
-      <div class="tab-panel perlist" ng-show="vm.activeTab == 1">
-        <div class="title_bar clearfix">
-          <span class="list1">考试名称</span>
-          <span class="list2">考试学分</span>
-          <span class="list6">时限</span>
-          <span class="list5">参加测试</span>
-          <span class="list4">考试时间</span>
-        </div>
-        <div class="list" ng-repeat="unFinish in TotalData.UnfinishModel">
-          <p class="clearfix">
-            <span class="list1 cur_name"><a href="">{{unFinish.Name}}</a></span>
-            <span class="list2">{{unFinish.CreditHour}}</span>
-            <span class="list6">{{unFinish.TimeLimit}}</span>
-            <span class="list5"><a target="_blank" ng-click="havTest(unFinish.Id)">参加测试</a></span>
-            <span class="list4">{{unFinish.StartTime | dateFilter | date:'yyyy-MM-dd'}}-{{unFinish.EndTime | dateFilter | date:'yyyy-MM-dd'}}</span>
-          </p>
-        </div>
-        <div ng-transclude="pagation"></div>
-      </div>
-      <div class="tab-panel perlist" ng-show="vm.activeTab == 3">
-        <div class="title_bar clearfix">
-          <span class="list1">考试名称</span>
-          <span class="list2">考试学分</span>
-          <span class="list6">时限</span>
-          <span class="list3">通过状态</span>
-          <span class="list3"><a href="">参加测试</a></span>
-          <span class="list3"><a href="">查看详细记录</a></span>
-        </div>
-        <div class="list" ng-repeat="Finish in TotalData.FinishModel">
-          <p class="clearfix">
-            <span class="list1 cur_name"><a href="">{{Finish.Name}}</a></span>
-            <span class="list2">{{Finish.CreditHour}}</span>
-            <span class="list6">{{Finish.TimeLimit}}</span>
-            <span class="list3" ng-show="Finish.PassFlag">通过</span>
-            <span class="list3" ng-hide="Finish.PassFlag">未通过</span>
+  <div class="exam_tab">
+    <span ng-click="showOrNot=true;vm.activeTab = 1;searchMyCenterCourse({'examType':'All','title':searchTitle})" ng-class="{active:showOrNot==true}" class="first">正式考试</span>
+    <span ng-click="showOrNot=false;vm.activeTab = 7;searchMyCenterCourse({'examType':'All','title':searchTitle})"  ng-class="{active:showOrNot==false}">模拟考试</span>
+  </div>
+  <div ng-show="showOrNot">
+    <!--<form class="form-inline formCourse">-->
+      <!--<select class="form-control" ng-init="selectedName = courseStatus[0]" ng-model="selectedName" ng-options="x.name for x in courseStatus" ng-change="selectChangeFun(selectedName.id)">-->
+      <!--</select>-->
+      <!--<div class="form-group">-->
+        <!--<input ng-model="searchTitle" type="text" class="form-control" style="width: 400px;" my-placeholder placeholder="请输入要搜索的考试">-->
+      <!--</div>-->
+      <!--<button type="submit" class="btn btn-default" ng-click="searchMyCenterCourse({'examType':selectedName.id,'title':searchTitle},1)">搜索</button>-->
+    <!--</form>-->
+    <div class="myTab">
+      <!--<ul class="nav nav-tabs" ng-init="vm.activeTab=1">-->
+        <!--<li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1;searchMyCenterCourse({'examType':'All','title':searchTitle})">需要参加的考试</a></li>-->
+        <!--<li ng-class="{active: vm.activeTab == 3}"><a href="javascript:;" ng-click="vm.activeTab = 3;searchMyCenterCourse({'examType':'Pass','title':searchTitle})">已通过的考试</a></li>-->
+        <!--<li ng-class="{active: vm.activeTab == 5}"><a href="javascript:;" ng-click="vm.activeTab = 5;searchMyCenterCourse({'examType':'NotPass','title':searchTitle})">未通过的考试</a></li>-->
+      <!--</ul>-->
+      <div class="tab-content" dw-loading="examList">
+        <div class="tab-panel perlist">
+          <div class="title_bar clearfix">
+            <span class="list1 list_1">职业技能资格</span>
+            <span class="list2">培训机构</span>
+            <span class="list4 list_4">考试时间</span>
+            <span class="list6">考试地点</span>
+            <span class="list6">时限</span>
+            <span class="list5 list_5">参加考试</span>
+          </div>
+          <div class="list" ng-repeat="unFinish in TotalData.UnfinishModel">
+            <p class="clearfix">
+              <span class="list1 list_1 cur_name"><a title="{{unFinish.Name}}">{{unFinish.Name}}</a></span>
+              <span class="list2">&nbsp;{{unFinish.GroupName}}</span>
+              <span class="list4 list_4">{{unFinish.StartTime | dateFilter | date:'yyyy-MM-dd hh:mm'}}至{{unFinish.EndTime | dateFilter | date:'yyyy-MM-dd hh:mm'}}</span>
+              <span class="list6"></span>
+              <span class="list6">{{unFinish.TimeLimit}}分钟</span>
+              <span class="list5 list_5"><a target="_blank" ng-click="havTest(unFinish.Id,formalFlag,formalType)">参加测试</a></span>
 
-            <span class="list3"><a ng-click="havTest(Finish.Id)" target="_blank">参加测试</a></span>
-            <span class="list3"><a href="#/exam/examDetailList/{{Finish.Id}}">查看详细记录</a></span>
-          </p>
+            </p>
+          </div>
+          <div ng-transclude="pagation"></div>
         </div>
-        <div ng-transclude="pagation"></div>
+        <!--<div class="tab-panel perlist" ng-show="vm.activeTab == 3">-->
+          <!--<div class="title_bar clearfix">-->
+            <!--<span class="list1">考试名称</span>-->
+            <!--<span class="list2">培训机构</span>-->
+            <!--<span class="list4 list_4">考试时间</span>-->
+            <!--<span class="list3">状态</span>-->
+
+          <!--</div>-->
+          <!--<div class="list" ng-repeat="PassList in TotalData.FinishPassModel">-->
+            <!--<p class="clearfix">-->
+              <!--<span class="list1 cur_name"><a href="">{{PassList.Name}}</a></span>-->
+              <!--<span class="list2">&nbsp;{{PassList.groupName}}</span>-->
+              <!--<span class="list4 list_4">{{PassList.StartTime | dateFilter | date:'yyyy-MM-dd hh:mm'}}-{{PassList.EndTime | dateFilter | date:'yyyy-MM-dd hh:mm'}}</span>-->
+              <!--<span class="list3">合格</span>-->
+            <!--</p>-->
+          <!--</div>-->
+          <!--<div ng-transclude="pagation"></div>-->
+        <!--</div>-->
+        <!--<div class="tab-panel perlist" ng-show="vm.activeTab == 5">-->
+          <!--<div class="title_bar clearfix">-->
+            <!--<span class="list1">考试名称</span>-->
+            <!--<span class="list2">培训机构</span>-->
+            <!--<span class="list4 list_4">考试时间</span>-->
+            <!--<span class="list3">状态</span>-->
+
+          <!--</div>-->
+          <!--<div class="list" ng-repeat="UnPassList in TotalData.FinishNotPassModel">-->
+            <!--<p class="clearfix">-->
+              <!--<span class="list1 cur_name"><a href="">{{UnPassList.Name}}</a></span>-->
+              <!--<span class="list2">&nbsp;{{UnPassList.groupName}}</span>-->
+              <!--<span class="list4 lsit_4">{{UnPassList.StartTime | dateFilter | date:'yyyy-MM-dd hh:mm'}}-{{UnPassList.EndTime | dateFilter | date:'yyyy-MM-dd hh:mm'}}</span>-->
+              <!--<span class="list3">不合格</span>-->
+            <!--</p>-->
+          <!--</div>-->
+          <!--<div ng-transclude="pagation"></div>-->
+        <!--</div>-->
       </div>
     </div>
   </div>
+  <div ng-show="!showOrNot">
+    <div class="myTab">
+      <div class="tab-content" dw-loading="examList">
+        <div class="tab-panel perlist">
+          <div class="title_bar clearfix">
+            <span class="list1">模拟测试名称</span>
+            <span class="list6">时限</span>
+            <span class="list5">参加模拟测试</span>
+          </div>
+          <div class="list" ng-repeat="MockList in TotalData.UnfinishModel">
+            <p class="clearfix">
+              <span class="list1 cur_name"><a href="">{{MockList.Name}}</a></span>
+              <span class="list6">{{MockList.TimeLimit}}分钟</span>
+              <span class="list5"><a target="_blank" ng-click="havTest(MockList.Id,mockFlag,mockType)">参加测试</a></span>
+
+            </p>
+          </div>
+          <div ng-transclude="pagation"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 <style>
   .myTab .perlist .list1 {
     width: 220px;
     height: 37px;
+  }
+  .myTab .perlist .list_1 {
+    width: 120px;
   }
   .myTab .perlist .list .list1 {
     text-align: left;
@@ -77,7 +126,7 @@
     padding-left: 10px;
   }
   .myTab .perlist .list2 {
-    width: 90px;
+    width: 80px;
   }
   .myTab .perlist .list3 {
     width: 95px;
@@ -85,10 +134,38 @@
   .myTab .perlist .list4 {
     width: 160px;
   }
+  .myTab .perlist .list_4 {
+    width: 240px;
+  }
   .myTab .perlist .list5 {
     width: 110px;
   }
+  .myTab .perlist .list_5 {
+    width: 88px;
+  }
   .myTab .perlist .list6 {
     width: 80px;
+  }
+  .exam_tab{
+    height:40px;
+  }
+  .exam_tab span{
+    color: #000;
+    width: auto;
+    padding: 10px 30px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .exam_tab span.first{
+    margin-left: 220px;
+  }
+  .exam_tab span.active{
+    background: #D71E24;
+    color: #fff;
+    border-color: #D71E24;
   }
 </style>

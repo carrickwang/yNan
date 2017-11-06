@@ -1,84 +1,135 @@
 <!--首页文章类型切换-->
 <div class="articleTab">
   <div class="articleTabTitle">
-    <span ng-click="three_tab({CategoryId: 25640})" class="title1 active">政策法规</span>
-    <span ng-click="three_tab({CategoryId: 25653})" class="title2">综合动态</span>
-    <span ng-click="three_tab({CategoryId: 41570})" class="title3">常见问题</span>
+    <span ng-click="" class="title1 active">培训动态</span>
+    <span ng-click="" class="title2">考试信息</span>
+    <i><a href="#/main/traininfo">更多>></a></i>
+    <i style="display: none;"><a href="#/main/examinfo">更多>></a></i>
   </div>
   <div class="articleList border_1">
-    <div class="articleList1 listActive">
-      <ul>
-        <li ng-repeat="policyData in policyData.ListData">
-          <img src="images/arrow.png" alt=""><a href="#/articleDetail/{{policyData.Id}}" title="{{policyData.Name}}">{{policyData.Name}}</a><span>{{policyData.CreateDate | dateFilter | date:'yyyy/MM/dd'}}</span>
-        </li>
-      </ul>
+    <div class="articleList1">
+      <table class="table">
+        <tr class="titleBg">
+          <th class="list1">培训计划</th>
+          <th class="list1">培训机构</th>
+          <th class="list1">职业技能资格</th>
+          <th class="list2">报名时间</th>
+          <th class="list2">培训时间</th>
+        </tr>
+        <tr ng-repeat="listData in trainInfoList">
+          <td class="list1"><a href="#" title="{{listData.TrainingName}}">{{listData.TrainingName}}</a></td>
+          <td class="list1" title="{{listData.GroupName}}">{{listData.GroupName}}</td>
+          <td class="list1" title="{{listData.SkillsQualificationName}}">{{listData.SkillsQualificationName}}</td>
+          <td class="list2">{{listData.ApplyStartTime | dateFilter | date:'yyyy-MM-dd'}}至{{listData.ApplyEndTime | dateFilter | date:'yyyy-MM-dd'}}</td>
+          <td class="list2">{{listData.TrainingStartTime | dateFilter | date:'yyyy-MM-dd'}}至{{listData.TrainingEndTime | dateFilter | date:'yyyy-MM-dd'}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="articleList1  listActive">
+      <table class="table">
+        <tr class="titleBg">
+          <th class="list1">职业技能资格</th>
+          <th class="list1">培训机构</th>
+          <th class="list2">考试时间</th>
+          <th class="list1">考试地点</th>
+        </tr>
+        <tr ng-repeat="listData in examInfoList">
+          <td class="list1" title="{{listData.ExamName}}">{{listData.ExamName}}</td>
+          <td class="list1" title="{{listData.GroupName}}">{{listData.GroupName}}</td>
+          <td class="list2">{{listData.StartTime | dateFilter | date:'yyyy-MM-dd'}}至{{listData.EndTime | dateFilter | date:'yyyy-MM-dd'}}</td>
+          <td class="list1" title="{{listData.Place}}">{{listData.Place}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
 <style>
   .articleTab{
     width: 100%;
-    height: 200px;
+    height: 216px;
     color: #666;
+    overflow: hidden;
 
+  }
+  .articleTab .articleTabTitle{
+    background: url(images/train_test_bg.png) no-repeat center center;
+    height: 29px;
+    overflow: hidden;
+  }
+  .articleTab .articleTabTitle > i{
+    float: right;
+    margin-right: 10px;
+    font-style: normal;
+  }
+  .articleTab .articleTabTitle > i >a{
+    color:#000;
   }
   .articleTab .articleTabTitle span{
     display: inline-block;
-    width: 151px;
+    width: 129px;
     text-align: center;
-    background: url(images/tab_bg_white01.png) no-repeat center center;
+    background: url(images/tab_bg_02.png) no-repeat center center;
     height: 26px;
     line-height:26px;
     margin: 0 -2px;
     cursor: pointer;
   }
   .articleTab .articleTabTitle span.title1{
-    margin: 0 -1px;
-  }
-  .articleTab .articleTabTitle span.title2{
-    margin-left: -3px;
+    margin-right: 20px;
   }
   .articleTab .articleTabTitle span.active{
-    background: url(images/tab_bg_red01.png) no-repeat center center;
+    background: url(images/tab_bg_01.png) no-repeat center center;
     color: #fff;
   }
   .articleList{
-    height: 173px;
+    height: 187px;
     width: 100%;
   }
-  .articleList > div{
-    display: none;
-    margin-top: 10px;
-  }
-  .articleList > div img{
-    margin: 0 12px;
-  }
-  .articleList > div li{
-    height:26px;
-    line-height:26px;
-  }
   .articleList > div.listActive{
-    display: block;
+    display: none;
   }
-  .articleList ul > li a{
+  .articleList .table th{
+    font-weight: 600;
+  }
+  .articleList .table th,.articleList .table td{
+    text-align: center;
+  }
+  .articleList .table th.list1{
+    width: 110px;
+  }
+  .articleList .table td.list1{
+    width: 110px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+  }
+  .articleList .table td.list1 a{
     display: inline-block;
-    width: 250px;
+    width: 90px;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-    margin-right: 70px;
+    overflow: hidden;
   }
-  .articleList > div img,.articleList ul > li a{
-    vertical-align: middle;
+  .articleList .table th.list2{
+    width: 180px;
   }
+  .articleList .table td.list2{
+    width: 180px;
+
+  }
+  .articleList .table td{
+    padding-right: 0;
+    padding-left:0;
+  }
+
 </style>
 <script>
   $(function () {
     $(".articleTab .articleTabTitle span").click(function () {
       var index = $(this).index();
-      //console.log(index);
       $(this).addClass("active").siblings(".articleTab .articleTabTitle span").removeClass("active");
-      //$(".articleList > div").eq(index).show().siblings(".articleList > div").hide();
+      $(".articleList > div").eq(index).show().siblings(".articleList > div").hide();
+      $(".articleTab .articleTabTitle i").eq(index).show().siblings(".articleTab .articleTabTitle i").hide();
     })
   })
 </script>

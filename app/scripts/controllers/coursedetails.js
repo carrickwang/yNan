@@ -57,6 +57,8 @@ angular.module('luZhouApp')
                     if (response.Type == 1) {
                         window.open('#/play/play/' + checkValue);
                         //$location.path('/play/play/'+checkValue);
+                    }else if(response.Type ==0){
+                      alert(response.Message);
                     }
                 });
         };
@@ -72,11 +74,22 @@ angular.module('luZhouApp')
                         alert(response.Message);
                     } else {
                         // $location.path("/exam/exam/" + Id);
-                        window.open("#/exam/exam/" + Id);
+                        window.open("#/exam/exam/formal/" + Id);
                     }
 
                 });
         };
       //站内搜索
       commonService.searchAll();
+      //播放类型
+      $scope.playType = function (courseId,times) {
+            commonService.getData(ALL_PORT.PlayType.url,'POST',{CourseId:courseId,Times:times})
+              .then(function(res){
+                  if(res.Type==1){
+                    window.open('#/play/play/' + courseId);
+                  }else{
+                    alert(res.Message);
+                  }
+              })
+      }
     });
